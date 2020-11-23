@@ -8,7 +8,7 @@ Cross-platform client for Symbol LaRed to manage accounts, mosaics, namespaces, 
 
 Lared wallet is available for Mac, Windows, and as a web application.
 
-1. Download LaREd Desktop Wallet from the [releases section](https://github.com/superhow/lared-wallet).
+1. Download LaRed Desktop Wallet from the [releases section](https://github.com/superhow/lared-wallet).
 
 2. Launch the executable file and follow the installation instructions.
 
