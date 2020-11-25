@@ -6,12 +6,14 @@
                     <div class="switch-language-container">
                         <LanguageSelector />
                     </div>
+                    
                     <div class="welcome-box">
+
                         <div class="banner-image">
-                            <span class="top-welcome-text">{{ $t('welcome_to_symbol') }}</span>
-                            <div class="bottom-welcome-text">{{ $t('program_description_line1') }}</div>
-                            <div class="bottom-welcome-text">{{ $t('program_description_line2') }}</div>
-                            <div class="bottom-welcome-text">{{ $t('program_description_line3') }}</div>
+                            <span class="top-welcome-text"><!--{{ $t('welcome_to_symbol') }}--></span>
+                            <div class="bottom-welcome-text"><!--{{ $t('program_description_line1') }}--></div>
+                            <div class="bottom-welcome-text"><!--{{ $t('program_description_line2') }}--></div>
+                            <div class="bottom-welcome-text"><!--{{ $t('program_description_line3') }}--></div>
                         </div>
                         <div class="login-card radius">
                             <div class="img-box" />

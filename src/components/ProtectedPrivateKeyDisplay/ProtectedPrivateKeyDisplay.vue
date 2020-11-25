@@ -62,6 +62,6 @@ export default class ProtectedPrivateKeyDisplay extends ProtectedPrivateKeyDispl
 
 .account-detail-row-3cols {
     display: grid;
-    grid-template-columns: 1.4rem 5rem auto;
+    grid-template-columns: 2.3rem 5rem auto;
 }
 </style>

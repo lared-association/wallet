@@ -63,6 +63,7 @@
             font-size: @bigFont;
             margin-bottom: 2%;
         }
+
         .text_red {
             color: @purpleDark;
             font-family: @symbolFontSemiBold;
@@ -95,28 +96,34 @@
                 font-size: @bigFont;
                 color: @grayLight;
                 font-family: @symbolFontSemiBold;
+
                 .check-container {
                     min-width: 0.25rem;
                     width: 0.25rem;
+
                     img {
                         display: none;
                         width: 15px;
                     }
                 }
+
                 &.done {
                     color: @purpleDark;
                     display: flex;
                     align-items: center;
+
                     .check-container img {
                         display: block;
                     }
                 }
+
                 &.active {
-                    background: linear-gradient(315.55deg, #44004e -1.68%, #5200c6 110.7%);
+                    background: linear-gradient(105deg, rgba(186,19,19,1) 0%, rgba(168,15,15,1) 26%, rgba(164,15,15,1) 64%, rgba(255,0,0,1) 100%);
                     color: @white;
                 }
             }
         }
+
         .form {
             flex: 1;
             max-width: 70%;
