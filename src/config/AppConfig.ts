@@ -37,7 +37,7 @@ export interface AppConfig {
 }
 
 const defaultAppConfig: AppConfig = {
-    title: 'Symbol Wallet',
+    title: 'LaRed Wallet',
     constants: {
         EVENTS_THROTTLING_TIME: 6000,
         MAX_LISTENER_RECONNECT_TRIES: 20,
