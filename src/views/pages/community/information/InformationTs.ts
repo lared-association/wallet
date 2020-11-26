@@ -37,15 +37,11 @@ export class InformationTs extends Vue {
     }
 
     public getPublisher(article: ArticleEntry) {
-        const r_flash = new RegExp(/nemflash\.io/);
-        const r_blog = new RegExp(/blog\.nem\.io/);
+        const r_cryptonews = new RegExp(/cryptonews\.com/);
 
-        if (r_flash.test(article.link)) {
-            return 'nemflash.io';
-        } else if (r_blog.test(article.link)) {
-            return 'blog.nem.io';
+        if (r_cryptonews.test(article.link)) {
+            return 'cryptonews.com';
         }
-
         return 'Unknown';
     }
 }

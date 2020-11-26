@@ -64,11 +64,11 @@ module.exports = {
     before: app => {
     },
     proxy: {
-      '/nemflash': {
-        target: 'http://rssmix.com/u/11801188/rss.xml',
+      '/cryptonews': {
+            target: 'https://cryptonews.com/news/feed', //For testing: this line can be changed to a different RSS source. 
         ws: true,
         changeOrigin: true,
-        pathRewrite: { '^/nemflash': '' }
+        pathRewrite: { '^/cryptonews': '' }
       },
     }
   },

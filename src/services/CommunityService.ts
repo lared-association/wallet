@@ -27,7 +27,7 @@ import { appConfig } from '@/config';
 const request = async (): Promise<string> => {
     let feedUrl = appConfig.articlesFeedUrl;
     if (process.env.NODE_ENV === 'development') {
-        feedUrl = '/nemflash';
+        feedUrl = '/cryptonews';
     }
     // execute request
     const response = await axios.get(feedUrl, { params: {} });
