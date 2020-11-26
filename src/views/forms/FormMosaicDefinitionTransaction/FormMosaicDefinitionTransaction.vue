@@ -66,7 +66,7 @@ export default class FormMosaicDefinitionTransaction extends FormMosaicDefinitio
     display: grid;
     grid-auto-flow: column;
     align-items: baseline;
-    color: #44004e;
+    color: #3d3d3d;
 }
 
 /deep/ .form-row {

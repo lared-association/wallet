@@ -1,6 +1,7 @@
 .quokka
 .DS_Store
-node_modules
+/node_modules/*
+!/node_modules/symbol-paper-wallets
 /dist
 /release
 /tests
