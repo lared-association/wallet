@@ -27,7 +27,7 @@ import { MnemonicQR, QRCodeGenerator } from 'symbol-qr-library';
 // @ts-ignore
 import failureIcon from '@/views/resources/img/monitor/failure.png';
 import { Password } from 'symbol-sdk';
-import { IHDAccountInfo, SymbolPaperWallet } from 'symbol-paper-wallets/index';
+import { IHDAccountInfo, LaredPaperWallet } from 'lared-paper-wallets';
 import { UIHelpers } from '@/core/utils/UIHelpers';
 import { AccountService } from '@/services/AccountService';
 
@@ -115,7 +115,7 @@ export default class ShowMnemonicTs extends Vue {
             rootAccountAddress: account.address.pretty(),
         };
 
-        const paperWallet = new SymbolPaperWallet(rootAccountInfo, [], this.currentProfile.networkType, this.currentProfile.generationHash);
+        const paperWallet = new LaredPaperWallet(rootAccountInfo, [], this.currentProfile.networkType, this.currentProfile.generationHash);
         const pdfArray: Uint8Array = await paperWallet.toPdf();
         return UIHelpers.downloadBytesAsFile(pdfArray, `paper-wallet-${this.currentProfile.profileName}`, 'application/pdf');
     }

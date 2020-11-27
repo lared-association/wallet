@@ -25,7 +25,7 @@ import FormProfileUnlock from '@/views/forms/FormProfileUnlock/FormProfileUnlock
 // @ts-ignore
 import { AccountModel } from '@/core/database/entities/AccountModel';
 import { MnemonicPassPhrase } from 'symbol-hd-wallets';
-import { SymbolPaperWallet, IAccountInfo, IHDAccountInfo } from 'symbol-paper-wallets';
+import { LaredPaperWallet, IAccountInfo, IHDAccountInfo } from 'lared-paper-wallets';
 import { AccountService } from '@/services/AccountService';
 import { UIHelpers } from '@/core/utils/UIHelpers';
 
@@ -178,7 +178,7 @@ export class ModalBackupProfileTs extends Vue {
             rootAccountAddress: rootAccount.address.pretty(),
         };
 
-        const paperWallet = new SymbolPaperWallet(rootAccountInfo, this.knownAccountInfos, this.networkType, this.generationHash);
+        const paperWallet = new LaredPaperWallet(rootAccountInfo, this.knownAccountInfos, this.networkType, this.generationHash);
         const pdfArray: Uint8Array = await paperWallet.toPdf();
         return UIHelpers.downloadBytesAsFile(pdfArray, `paper-wallet-${this.currentProfile.profileName}`, 'application/pdf');
     }

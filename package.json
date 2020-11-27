@@ -41,6 +41,7 @@
         "axios": "^0.19.0",
         "file-saver": "^2.0.2",
         "json2csv": "^5.0.1",
+        "lared-paper-wallets": "file:modules/lared-paper-wallets",
         "request": "^2.88.0",
         "rss-parser": "^3.7.3",
         "rxjs": "^6.5.2",

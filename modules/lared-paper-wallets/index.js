@@ -27,7 +27,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SymbolPaperWallet = void 0;
+exports.LaredPaperWallet = void 0;
 const pdf_lib_1 = require("pdf-lib");
 const fontkit_1 = __importDefault(require("@pdf-lib/fontkit"));
 const symbol_qr_library_1 = require("symbol-qr-library");
@@ -62,9 +62,9 @@ const ADDRESS_QR_POSITION = {
     height: 120,
 };
 /**
- * Symbol Paper wallet class
+ * Lared Paper wallet class
  */
-class SymbolPaperWallet {
+class LaredPaperWallet {
     constructor(hdAccountInfo, accountInfos, network, generationHashSeed = DEFAULT_GENERATION_HASH_SEED) {
         this.hdAccount = hdAccountInfo;
         this.accountInfos = accountInfos;
@@ -210,5 +210,5 @@ class SymbolPaperWallet {
         });
     }
 }
-exports.SymbolPaperWallet = SymbolPaperWallet;
+exports.LaredPaperWallet = LaredPaperWallet;
 //# sourceMappingURL=index.js.map
