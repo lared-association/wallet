@@ -16,26 +16,6 @@ const DEFAULT_GENERATION_HASH_SEED =
  * Printing constants
  */
 const MNEMONIC_POSITION = {
-<<<<<<< HEAD
-  x: 184,
-  y: 36,
-};
-const ADDRESS_POSITION = {
-  x: 184,
-  y: 90,
-};
-const MNEMONIC_QR_POSITION = {
-  x: 264,
-  y: 159,
-  width: 99,
-  height: 99,
-};
-const ADDRESS_QR_POSITION = {
-  x: 418,
-  y: 159,
-  width: 99,
-  height: 99,
-=======
   x: 200,
   y: 36,
 };
@@ -54,7 +34,6 @@ const ADDRESS_QR_POSITION = {
   y: 180,
   width: 120,
   height: 120,
->>>>>>> 39f84d9f90b33fec382c8d98ae691adf9333de63
 };
 
 /**
