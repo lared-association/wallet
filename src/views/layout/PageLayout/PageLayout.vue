@@ -51,7 +51,6 @@
                     </div>
                 </transition>
                 <div class="footer">
-                    <span class="footer-phrase">Powered by <b>NEM Technology.</b></span>
                 </div>
             </div>
         </div>
