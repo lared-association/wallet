@@ -50,8 +50,6 @@ const defaultAppConfig: AppConfig = {
     },
     languages: [
         { value: 'en-US', label: 'English' },
-        { value: 'zh-CN', label: '中文' },
-        { value: 'ja-JP', label: '日本語' },
     ],
     marketServerUrl: 'http://app.nemcn.io',
     articlesFeedUrl: 'https://cors-anywhere.herokuapp.com/https://cryptonews.com/news/feed',
