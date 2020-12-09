@@ -1,6 +1,8 @@
 <template>
     <div class="step-2-wrapper" @mouseover="shouldTrackMouse && handleMousemove($event)">
         <img src="@/views/resources/img/login/connector-pink.png" />
+        <span class="text"> {{ $t('please_move_mouse_mnemonic') }}</span>
+
         <Progress stroke-color="#c40000" :percent="percent" />
     </div>
 </template>

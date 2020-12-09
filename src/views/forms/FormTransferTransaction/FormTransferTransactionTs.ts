@@ -566,6 +566,7 @@ export class FormTransferTransactionTs extends FormTransactionBase {
      */
     onEncryptionChange() {
         if (this.formItems.encryptMessage) {
+
             if (!this.currentRecipient?.publicKey) {
                 this.$store
                     .dispatch('notification/ADD_ERROR', this.$t(NotificationType.RECIPIENT_PUBLIC_KEY_INVALID_ERROR))

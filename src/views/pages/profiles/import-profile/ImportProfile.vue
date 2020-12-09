@@ -5,17 +5,12 @@
                 <div v-if="getCurrentStep() === 0">
                     <div class="right-hints-section">
                         <p class="text1">
-                            {{ $t('profile_import') }}
+                            {{ $t('restore_profile') }}
                         </p>
                         <p class="text">
-                            {{ $t('import_private_key_profile_description_tip1') }}
+                            {{ $t('restore_profile_description_tip1') }}
                         </p>
-                        <p class="text">
-                            {{ $t('import_private_key_profile_description_tip2') }}
-                        </p>
-                        <p class="text_red">
-                            {{ $t('profile_description_tips3') }}
-                        </p>
+                        
                     </div>
                 </div>
                 <div v-if="getCurrentStep() === 1">
