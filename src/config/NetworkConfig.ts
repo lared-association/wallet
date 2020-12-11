@@ -50,10 +50,10 @@ export interface NetworkConfig {
 }
 
 const defaultNetworkConfig: NetworkConfig = {
-    explorerUrl: 'http://20.52.146.76/',
-    faucetUrl: 'http://faucet-0.10.0.x-01.symboldev.network/',
+    explorerUrl: 'http://explorer.superhow.net/',
+    faucetUrl: 'http://faucet.superhow.net/',
     defaultNetworkType: 96,
-    defaultNodeUrl: 'http://20.52.146.76:3000',
+    defaultNodeUrl: 'http://51.116.168.38:3000',
     networkConfigurationDefaults: {
         maxMosaicDivisibility: 6,
         namespaceGracePeriodDuration: 7776000,
@@ -74,8 +74,8 @@ const defaultNetworkConfig: NetworkConfig = {
         epochAdjustment: 1573430400,
     },
     nodes: [
-        { friendlyName: 'lared-dual-1', roles: 2, url: 'http://20.52.146.76:3000' },
-        { friendlyName: 'lared-dual-2', roles: 2, url: 'http://51.116.118.178:3000' },
+        { friendlyName: 'lared-dual-1', roles: 2, url: 'http://51.116.168.38:3000' },
+        { friendlyName: 'lared-dual-2', roles: 2, url: 'http://51.116.171.30:3000' },
     ],
 };
 
