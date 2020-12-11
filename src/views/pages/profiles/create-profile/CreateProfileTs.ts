@@ -21,7 +21,7 @@ export default class CreateProfileTs extends Vue {
      * List of steps
      * @var {string[]}
      */
-    public StepBarTitleList = ['create_profile', 'generate_mnemonic', 'backup_mnemonic_phrase', 'verify_Mnemonic_phrase', 'finish'];
+    public StepBarTitleList = ['enter_profile_details', 'generate_mnemonic', 'backup_mnemonic_phrase', 'verify_Mnemonic_phrase', 'finish'];
 
     /**
      * Hook called when the page is mounted
