@@ -57,11 +57,11 @@ export default class ProtectedPrivateKeyDisplay extends ProtectedPrivateKeyDispl
     font-family: @symbolFontLight;
     text-overflow: ellipsis;
     overflow: hidden;
-    color: #3d3d3d;
+    color: #44004e;
 }
 
 .account-detail-row-3cols {
     display: grid;
-    grid-template-columns: 2.3rem 5rem auto;
+    grid-template-columns: 1.4rem 5rem auto;
 }
 </style>

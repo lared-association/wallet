@@ -7,7 +7,12 @@
                         <template v-slot:label> {{ $t('form_label_default_account') }}: </template>
                         <template v-slot:inputs>
                             <div class="inputs-container select-container">
-                                <AccountSelectorField v-model="formItems.defaultAccount" :default-form-style="true" :show-icon="false" />
+                                <AccountSelectorField
+                                    v-model="formItems.defaultAccount"
+                                    :default-form-style="true"
+                                    :show-icon="false"
+                                    @on-change="onChange"
+                                />
                             </div>
                         </template>
                     </FormRow>
@@ -16,33 +21,43 @@
                         <template v-slot:label> {{ $t('form_label_default_max_fee') }}: </template>
                         <template v-slot:inputs>
                             <div class="inputs-container select-container">
-                                <MaxFeeSelector v-model="formItems.defaultFee" />
+                                <MaxFeeSelector v-model="formItems.defaultFee" @on-change="onChange" />
                             </div>
                         </template>
                     </FormRow>
 
-                    <ExplorerUrlSetter v-model="formItems.explorerUrl" :auto-submit="false" />
+                    <ExplorerUrlSetter v-model="formItems.explorerUrl" :auto-submit="false" @on-change="onChange" />
 
                     <FormRow>
                         <template v-slot:label> {{ $t('form_label_language') }}: </template>
                         <template v-slot:inputs>
                             <div class="inputs-container">
-                                <LanguageSelector v-model="formItems.language" :auto-submit="false" :default-form-style="true" />
+                                <LanguageSelector
+                                    v-model="formItems.language"
+                                    :auto-submit="false"
+                                    :default-form-style="true"
+                                    @on-change="onChange"
+                                />
                             </div>
                         </template>
                     </FormRow>
 
                     <div class="form-row form-submit">
-                        <button class="button-style inverted-button pl-2 pr-2" type="submit" @click="handleSubmit(onSubmit)">
+                        <button
+                            class="button-style inverted-button pl-2 pr-2 confirm-reset"
+                            type="submit"
+                            :disabled="isConfirmButtonDisabled"
+                            @click="handleSubmit(onSubmit)"
+                        >
                             {{ $t('confirm') }}
                         </button>
-                        <button class="button-style button danger-button pl-2 pr-2" type="reset" @click.prevent="resetForm">
+                        <button class="button-style button danger-button pl-2 pr-2 confirm-reset" type="reset" @click.prevent="resetForm">
                             {{ $t('reset') }}
                         </button>
                         <div style="width: 100%; text-align: left; margin-left: 0.7rem;">
-                            <a class="button-style button danger-button pl-2 pr-2" style="margin-right: 0.4rem;" href="/">
+                            <button class="button-style button danger-button pl-2 pr-2" style="margin-right: 0.4rem;" @click="logout">
                                 {{ $t('logout') }}
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -82,6 +97,9 @@ export default class FormGeneralSettings extends FormGeneralSettingsTs {}
     button[type='reset'] {
         margin-right: 35px;
     }
+}
+.confirm-reset {
+    width: 20%;
 }
 
 /deep/ .form-row {

@@ -24,6 +24,7 @@ import {
     RentalFees,
     RepositoryFactoryHttp,
     NodeInfo,
+    RoleType,
 } from 'symbol-sdk';
 import { Subscription } from 'rxjs';
 import _ from 'lodash';
@@ -62,7 +63,33 @@ type BlockRangeType = { start: number };
 
 /// end-region custom types
 
-const staticPeerNodes: NodeInfo[] = [] as NodeInfo[];
+const staticPeerNodes: NodeInfo[] = [
+    {
+        nodePublicKey: 'D78CB884297CABEFDAC66DB9599C31CB7C719DC09F40E9A95984EFC1234E0324',
+        host: 'api-01.ap-northeast-1.testnet.symboldev.network',
+        roles: [RoleType.PeerNode],
+    },
+    {
+        nodePublicKey: '9F03C0953AD1065E1E78C804FBAF3D4D9E29CE89C9687CA2D7F39886FE5952EA',
+        host: 'api-01.ap-southeast-1.testnet.symboldev.network',
+        roles: [RoleType.PeerNode],
+    },
+    {
+        nodePublicKey: '135214B2892687293096D909CF040C3EFDD60E5AE4C40B5257E6BFE2B8467AA8',
+        host: 'api-01.eu-central-1.testnet.symboldev.network',
+        roles: [RoleType.PeerNode],
+    },
+    {
+        nodePublicKey: '7064CA58E2A24A4426BAE33051C6EC39BCBCC58C4900AB32406C3279FC4C93D4',
+        host: 'api-01.eu-west-1.testnet.symboldev.network',
+        roles: [RoleType.PeerNode],
+    },
+    {
+        nodePublicKey: 'F57FB70C3F51663D0DDF47303C93ADC8FDD266DC61BBA67B983052D075FD900E',
+        host: 'api-01.us-east-1.testnet.symboldev.network',
+        roles: [RoleType.PeerNode],
+    },
+] as NodeInfo[];
 
 interface NetworkState {
     initialized: boolean;
@@ -262,8 +289,8 @@ export default {
             // subscribe to updates
 
             if (oldGenerationHash != networkModel.generationHash) {
-                dispatch('account/NETWORK_CHANGED', {}, { root: true });
-                dispatch('statistics/LOAD', {}, { root: true });
+                await dispatch('account/NETWORK_CHANGED', {}, { root: true });
+                await dispatch('statistics/LOAD', {}, { root: true });
 
                 // check if current profile network type and generation hash matches current network
                 if (
@@ -278,7 +305,8 @@ export default {
             }
             await dispatch('UNSUBSCRIBE');
             await listener.open();
-            dispatch('SUBSCRIBE');
+            await dispatch('SUBSCRIBE');
+            await dispatch('account/SUBSCRIBE', rootGetters['account/currentSignerAddress'], { root: true });
         },
 
         async SET_CURRENT_PEER({ dispatch }, currentPeerUrl) {
@@ -309,7 +337,7 @@ export default {
                 await dispatch('CONNECT', currentPeerUrl);
             } catch (e) {
                 console.log(e);
-                dispatch(
+                await dispatch(
                     'notification/ADD_ERROR',
                     `${app.$t('error_peer_connection_went_wrong', {
                         peerUrl: currentPeerUrl,
@@ -399,7 +427,7 @@ export default {
             subscriptions.forEach((s) => s.unsubscribe());
             const listener: Listener = getters.listener;
             if (listener) {
-                listener.close();
+                await listener.close();
             }
             // update state
             commit('subscriptions', []);

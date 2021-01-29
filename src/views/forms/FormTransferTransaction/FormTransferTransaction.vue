@@ -23,7 +23,7 @@
                             :mosaic-hex-ids="mosaicInputsManager.getMosaicsBySlot(attachedMosaic.uid)"
                             :absolute="false"
                             :uid="attachedMosaic.uid"
-                            :is-show-delete="index >= 0 && index === formItems.attachedMosaics.length - 1"
+                            :is-show-delete="index > 0 && index === formItems.attachedMosaics.length - 1"
                             :is-first-item="index === 0"
                             @input-changed="onMosaicInputChange"
                             @input-deleted="onDeleteMosaicInput"
@@ -34,11 +34,16 @@
                     <div class="form-row align-right action-link" style="margin-top: -0.1rem;">
                         <a
                             v-if="mosaicInputsManager.hasFreeSlots()"
-                            style="color: #3d3d3d; margin-right: 0.1rem; font-size: 0.14rem;"
+                            style="color: #44004e; margin-right: 0.1rem; font-size: 0.14rem;"
                             @click="addMosaicAttachmentInput"
                             >{{ $t('add_mosaic') }}</a
                         >
-                        <img src="@/views/resources/img/newicons/Add.svg" class="icon-left-button" style="vertical-align: middle;" />
+                        <img
+                            src="@/views/resources/img/newicons/Add.svg"
+                            class="icon-left-button clickable"
+                            style="vertical-align: middle;"
+                            @click="addMosaicAttachmentInput"
+                        />
                     </div>
 
                     <!-- Transfer message input field -->
