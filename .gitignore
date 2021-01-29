@@ -22,3 +22,5 @@ __mocks__/**/*.map
 __mocks__/**/*.js
 /.templates
 template.config.js
+/.vs
+/package-lock.json

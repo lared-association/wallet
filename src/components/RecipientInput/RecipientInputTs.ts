@@ -50,6 +50,9 @@ export class RecipientInputTs extends Vue {
     })
     value: string;
 
+    @Prop({ default: false })
+    readonly disabled!: boolean;
+
     /**
      * Current network type
      * @var {NetworkType}
@@ -73,7 +76,7 @@ export class RecipientInputTs extends Vue {
     }
 
     public set rawValue(input: string) {
-        this.$emit('input', input.replace(/-/g, "").trim());
+        this.$emit('input', input);
     }
     /// end-region computed properties getter/setter
 
