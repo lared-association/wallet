@@ -1,7 +1,7 @@
 .quokka
 .DS_Store
 /node_modules/*
-!/node_modules/symbol-paper-wallets
+!/node_modules/vue-router
 /dist
 /release
 /tests
