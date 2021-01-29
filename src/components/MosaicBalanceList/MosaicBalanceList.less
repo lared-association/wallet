@@ -110,6 +110,7 @@
 
 .searchMosaic {
     height: 100%;
+
     .mosaic_data {
         .mosaic_name {
             left: 0.7rem;
@@ -181,15 +182,15 @@
     }
 
     .img_container {
-        display: inline-block;
+        display: contents;
         position: absolute;
         top: 0.23rem;
         margin-right: 0.15rem;
 
         img {
             display: inline-block;
-            width: 0.22rem;
-            height: 0.2rem;
+            width: 0.25rem;
+            height: 0.35rem;
         }
 
         img.grayed-xym-logo {
@@ -206,7 +207,7 @@
         position: relative;
         top: 0;
         left: 0.4rem;
-        width: 1.8rem;
+        width: 3rem;
         font-size: @normalFont;
         font-weight: 400;
         color: @purpleDark;
@@ -275,6 +276,7 @@
 /deep/.ivu-tabs-bar {
     margin-bottom: 0 !important;
     position: relative;
+
     .asset_list {
         width: 0.24rem;
         position: absolute;
@@ -282,19 +284,23 @@
         right: 0.1rem;
         z-index: 1;
     }
+
     border: none !important;
     border-color: transparent !important;
 }
 
 .mosaics-list-container {
     height: 100%;
+
     /deep/.ivu-tabs {
         height: 100%;
+
         .ivu-tabs-content {
             height: calc(100% - 0.45rem);
             overflow-y: auto;
         }
     }
+
     .searchMosaic {
         overflow-y: auto;
     }
