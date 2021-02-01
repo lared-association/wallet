@@ -4,6 +4,8 @@
 /release
 /tests
 .git
+/node_modules
+/dist
 .idea
 .vscode
 .run
