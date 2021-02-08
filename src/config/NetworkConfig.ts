@@ -38,6 +38,7 @@ export interface NetworkConfigurationDefaults {
     maxMosaicDivisibility: number;
     maxMessageSize: number;
     epochAdjustment: number;
+    totalChainImportance: number;
 }
 
 export interface NetworkConfig {
@@ -72,6 +73,7 @@ const defaultNetworkConfig: NetworkConfig = {
         harvestingMosaicId: '6D601F79F46AF3D3',
         defaultDynamicFeeMultiplier: 1000,
         epochAdjustment: 1573430400,
+        totalChainImportance: undefined,
     },
     nodes: [
         { friendlyName: 'lared-dual-1', roles: 2, url: 'http://51.116.168.38:3000' },

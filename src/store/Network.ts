@@ -110,6 +110,7 @@ interface NetworkState {
     rentalFeeEstimation: RentalFees;
     networkIsNotMatchingProfile: boolean;
     peerNodes: NodeInfo[];
+    harvestingPeerNodes: NodeInfo[];
     selectedPeerNode: NodeInfo;
 }
 
@@ -134,6 +135,7 @@ const networkState: NetworkState = {
     epochAdjustment: networkConfig.networkConfigurationDefaults.epochAdjustment,
     networkIsNotMatchingProfile: false,
     peerNodes: [],
+    harvestingPeerNodes: [],
     selectedPeerNode: null,
 };
 
@@ -159,6 +161,7 @@ export default {
         rentalFeeEstimation: (state: NetworkState) => state.rentalFeeEstimation,
         networkIsNotMatchingProfile: (state: NetworkState) => state.networkIsNotMatchingProfile,
         peerNodes: (state: NetworkState) => state.peerNodes,
+        harvestingPeerNodes: (state: NetworkState) => state.harvestingPeerNodes,
     },
     mutations: {
         setInitialized: (state: NetworkState, initialized: boolean) => {
@@ -226,13 +229,14 @@ export default {
             Vue.set(state, 'subscriptions', [...subscriptions, payload]);
         },
         peerNodes: (state: NetworkState, peerNodes: NodeInfo[]) => Vue.set(state, 'peerNodes', peerNodes),
+        harvestingPeerNodes: (state: NetworkState, harvestingPeerNodes: NodeInfo[]) =>
+            Vue.set(state, 'harvestingPeerNodes', harvestingPeerNodes),
     },
     actions: {
         async initialize({ commit, dispatch, getters }) {
             const callback = async () => {
                 // commit('knowNodes', new NodeService().getKnowNodesOnly())
                 await dispatch('CONNECT');
-                dispatch('REST_NETWORK_RENTAL_FEES');
                 // update store
                 commit('setInitialized', true);
             };
@@ -303,10 +307,14 @@ export default {
                     dispatch('SET_NETWORK_IS_NOT_MATCHING_PROFILE', false);
                 }
             }
+            const currentSignerAddress = rootGetters['account/currentSignerAddress'];
+            // close websocket subscription for old node
             await dispatch('UNSUBSCRIBE');
+            await dispatch('account/UNSUBSCRIBE', currentSignerAddress, { root: true });
+            // subscribe to the newly selected node websocket
             await listener.open();
             await dispatch('SUBSCRIBE');
-            await dispatch('account/SUBSCRIBE', rootGetters['account/currentSignerAddress'], { root: true });
+            await dispatch('account/SUBSCRIBE', currentSignerAddress, { root: true });
         },
 
         async SET_CURRENT_PEER({ dispatch }, currentPeerUrl) {
@@ -353,18 +361,11 @@ export default {
             }
         },
 
-        REST_NETWORK_RENTAL_FEES({ rootGetters, dispatch }) {
+        async REST_NETWORK_RENTAL_FEES({ rootGetters, commit }) {
             const repositoryFactory: RepositoryFactory = rootGetters['network/repositoryFactory'];
-            repositoryFactory
-                .createNetworkRepository()
-                .getRentalFees()
-                .subscribe((rentalFee: RentalFees) => {
-                    dispatch('SET_RENTAL_FEE_ESTIMATE', rentalFee);
-                });
-        },
-
-        SET_RENTAL_FEE_ESTIMATE({ commit }, rentalFee) {
-            commit('rentalFeeEstimation', rentalFee);
+            const getRentalFeesPromise = repositoryFactory.createNetworkRepository().getRentalFees().toPromise();
+            const rentalFees = await getRentalFeesPromise;
+            commit('rentalFeeEstimation', rentalFees);
         },
         SET_NETWORK_IS_NOT_MATCHING_PROFILE({ commit }, networkIsNotMatchingProfile) {
             commit('networkIsNotMatchingProfile', networkIsNotMatchingProfile);
@@ -404,6 +405,48 @@ export default {
             const allNodes = [...staticPeerNodes, ...peerNodes.sort((a, b) => a.host.localeCompare(b.host))];
             commit('peerNodes', _.uniqBy(allNodes, 'host'));
         },
+        // TODO :: re-apply that behavior if red screen issue fixed
+        // load nodes that eligible for delegate harvesting
+        // async LOAD_HARVESTING_PEERS({ commit, getters }) {
+        //     const peerNodes = getters.peerNodes;
+        //     peerNodes.forEach(async (node: NodeInfo) => {
+        //         await setTimeout(async () => {
+        //             try {
+        //                 const nodeUrl = URLHelpers.getNodeUrl(node.host);
+        //                 const repositoryFactory = new RepositoryFactoryHttp(nodeUrl);
+        //                 const nodeRepository = repositoryFactory.createNodeRepository();
+        //                 const unlockedAccounts = await nodeRepository.getUnlockedAccount().toPromise();
+        //                 const nodeInfo = await nodeRepository.getNodeInfo().toPromise();
+
+        //                 if (unlockedAccounts) {
+        //                     let validNodeInfo: NodeInfo;
+        //                     let harvestingPeers: NodeInfo[];
+        //                     // in case nodeInfo missing host
+        //                     if (!nodeInfo.host) {
+        //                         validNodeInfo = new NodeInfo(
+        //                             nodeInfo.publicKey,
+        //                             nodeInfo.networkGenerationHashSeed,
+        //                             nodeInfo.port,
+        //                             nodeInfo.networkIdentifier,
+        //                             nodeInfo.version,
+        //                             nodeInfo.roles,
+        //                             node.host,
+        //                             nodeInfo.friendlyName,
+        //                             nodeInfo.nodePublicKey,
+        //                         );
+        //                         harvestingPeers = [validNodeInfo, ...getters.harvestingPeerNodes];
+        //                     } else {
+        //                         harvestingPeers = [nodeInfo, ...getters.harvestingPeerNodes];
+        //                     }
+        //                     // update harvesting peers
+        //                     commit('harvestingPeerNodes', _.uniqBy(harvestingPeers, 'host'));
+        //                 }
+        //             } catch (err) {
+        //                 console.error('Harvesting not enabled', err);
+        //             }
+        //         }, 500);
+        //     });
+        // },
         /**
          * Websocket API
          */
