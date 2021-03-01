@@ -1,4 +1,4 @@
-FROM node:10 AS builder
+FROM node:12 AS builder
 
 # Python and Make
 ENV PYTHONUNBUFFERED=1
@@ -8,3 +8,5 @@ RUN pip3 install --no-cache --upgrade pip setuptools
 RUN apk add g++ make python
 RUN node --version
 RUN apk add --update pkgconfig
+
+WORKDIR /app
