@@ -8,5 +8,3 @@ RUN pip3 install --no-cache --upgrade pip setuptools
 RUN apk add g++ make python
 RUN node --version
 RUN apk add --update pkgconfig
-
-WORKDIR /app

@@ -1,8 +1,10 @@
 pipeline {
     agent { 
-        dockerfile {
-            filename 'Dockerfile.jenkins'
-         } 
+
+         docker { image 'node:12' }
+        // dockerfile {
+        //     filename 'Dockerfile.jenkins'
+        //  } 
      }
 
     stages {
