@@ -1,7 +1,7 @@
 pipeline {
     agent { 
         dockerfile {
-            customWorkspace '/app'
+            customWorkspace '/test'
             filename 'JenkinsDocker'
          } 
      }
