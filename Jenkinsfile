@@ -7,6 +7,8 @@ pipeline {
             steps {
                 sh 'export WEB=true'
                 sh 'echo $WEB'
+                sh 'apk add --no-cache g++ make python'
+                
            }
         }
         
