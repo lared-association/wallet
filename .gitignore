@@ -21,4 +21,3 @@ __mocks__/**/*.js
 /.templates
 template.config.js
 /.vs
-/node_modules

@@ -51,20 +51,20 @@ export interface NetworkConfig {
 }
 
 const defaultNetworkConfig: NetworkConfig = {
-    explorerUrl: 'http://explorer.superhow.net/',
-    faucetUrl: 'http://faucet.superhow.net/',
+    explorerUrl: 'http://explorer.lared.superhow.net/',
+    faucetUrl: 'http://faucet.lared.superhow.net/',
     defaultNetworkType: 96,
-    defaultNodeUrl: 'http://51.116.168.38:3000',
+    defaultNodeUrl: 'http://51.116.236.138:3000',
     networkConfigurationDefaults: {
         maxMosaicDivisibility: 6,
-        namespaceGracePeriodDuration: 7776000,
+        namespaceGracePeriodDuration: 120,
         lockedFundsPerAggregate: '10000000',
         maxCosignatoriesPerAccount: 25,
         blockGenerationTargetTime: 15,
         maxNamespaceDepth: 3,
         maxMosaicDuration: 315360000,
-        minNamespaceDuration: 2592000,
-        maxNamespaceDuration: 63072000,
+        minNamespaceDuration: 1,
+        maxNamespaceDuration: 2102400,
         maxTransactionsPerAggregate: 250,
         maxCosignedAccountsPerAccount: 25,
         maxMessageSize: 1024,
@@ -76,8 +76,8 @@ const defaultNetworkConfig: NetworkConfig = {
         totalChainImportance: undefined,
     },
     nodes: [
-        { friendlyName: 'lared-dual-1', roles: 2, url: 'http://51.116.168.38:3000' },
-        { friendlyName: 'lared-dual-2', roles: 2, url: 'http://51.116.171.30:3000' },
+        { friendlyName: 'lared-dual-1', roles: 2, url: 'http://51.116.236.138:3000' },
+        { friendlyName: 'lared-dual-2', roles: 2, url: 'http://20.52.149.171:3000' },
     ],
 };
 
