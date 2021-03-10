@@ -64,11 +64,11 @@ module.exports = {
     before: app => {
     },
     proxy: {
-      '/nemflash': {
-        target: 'https://nemgrouplimited.github.io/symbol-news/',
+      '/cryptonews': {
+        target: 'https://cryptonews.com/news/feed',
         ws: true,
         changeOrigin: true,
-        pathRewrite: { '^/nemflash': '' }
+        pathRewrite: { '^/cryptonews': '' }
       },
     }
   },

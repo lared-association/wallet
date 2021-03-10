@@ -56,7 +56,7 @@
     "lodash": "^4.17.20",
     "request": "^2.88.0",
     "rss-parser": "^3.7.3",
-    "rxjs": "^6.5.2",
+    "rxjs": "^6.6.6",
     "trezor-connect": "^7.0.5",
     "utf8": "^3.0.0",
     "vee-validate": "^3.2.3",
@@ -68,7 +68,7 @@
     "vue-moment": "^4.1.0",
     "vue-number-animation": "1.0.5",
     "vue-property-decorator": "^8.1.0",
-    "vue-qrcode-reader": "^2.3.10",
+    "vue-qrcode-reader": "^2.3.17",
     "vue-responsive-video-background-player": "^1.1.4",
     "vue-router": "3.1.6",
     "vue-rx": "^6.2.0",
@@ -76,8 +76,8 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "@babel/compat-data": "^7.9.6",
-    "@babel/core": "^7.7.2",
+    "@babel/compat-data": "^7.13.8",
+    "@babel/core": "^7.13.8",
     "@types/file-saver": "^2.0.1",
     "@types/jest": "^23.3.1",
     "@types/json2csv": "^5.0.1",
@@ -99,7 +99,7 @@
     "babel-preset-env": "^1.7.0",
     "bufferutil": "^4.0.1",
     "cross-env": "^5.1.1",
-    "electron": "11.1.0",
+    "electron": "^11.1.0",
     "electron-builder": "22.9.1",
     "electron-notarize": "1.0.0",
     "electron-packager": "15.2.0",
@@ -140,12 +140,12 @@
   },
   "main": "./public/build.js",
   "build": {
-    "appId": "io.nem.symbol.desktop-wallet",
+    "appId": "superhow.lared.desktop-wallet",
     "extends": null,
-    "copyright": "Copyright © 2019-2021 NEM",
-    "productName": "Symbol Wallet",
+    "copyright": "",
+    "productName": "LaRedWallet",
     "artifactName": "${name}-${os}-${arch}-${version}.${ext}",
-    "icon": "./dist/assets/icons/Icon.icns",
+    "icon": "./public/assets/icons/Lared.ico",
     "files": [
       "dist/**/*",
       "package.json",
@@ -184,7 +184,7 @@
     "oneClick": false,
     "perMachine": false,
     "allowToChangeInstallationDirectory": true,
-    "installerIcon": "./assets/icons/Symbol.ico"
+    "installerIcon": "./assets/icons/Lared.ico"
   },
   "linux": {
     "category": "Finance",
