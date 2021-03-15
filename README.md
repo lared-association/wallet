@@ -4,7 +4,7 @@
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-Cross-platform client to manage accounts, tokens, namespaces, and issue transactions.
+Cross-platform client for managing accounts, tokens, namespaces, and issuing transactions.
 ***
 ## Features
 ### Home 
@@ -104,11 +104,7 @@ npm run dev
 * Mnemonic Backup (PDF)                 ✔️
 * QR Code Upload (Upload Image)         ✔️
 * QR Code Import (Scan via Camera)      ✔️
-### Features currently not working
 
-* Nothing to report so far.
-
-***
 ## Main changes
 * Changed news source (RSS channel) to cryptonews.com (https://cryptonews.com/news/feed) for more relevant news articles.
 * Altered UI elements (colors, text, icons) for a more appealing, consistent and coherent appearance.
@@ -117,6 +113,16 @@ npm run dev
 	* Mosaics       -> Tokens
 	* Harvesting    -> Staking
 * Lared-paper-wallets node module has been added to enhance the design of exported PDF paper wallet (when making a backup of accounts or mnemonic phrases). The templates of paper wallets are .PDF files, encoded in Base64 and stored in encodedBasePdf.js and encodedBasePrivateKeyPdf.js files in /modules/lared-paper-wallets/resources.
+***
+### Known issues
+
+* The process of starting Delegated Staking may be problematic, as there may be difficulties in linking the node, remote and vrf keys. Linking a key may appear to be ineffective, as the screen may not refresh after signing the linking transaction. In that case, logout and login again.
+
+***
+### Additional notes
+
+* The RSS feed (cryptonews.com) is fetched using a CORS proxy (cors-bridged) if the project is deployed in the 'development' environment, and without a proxy if the project is in the 'production' environment. For the web version of the project, the news section normally may not show any fetched news due to CORS policy, thus the CORS proxy is applied.
+
 ***
 # Troubleshooting & FAQ (Frequently Asked Questions)
 ### Q: Nothing happens after I press "Link All keys" in the Staking menu and sign the transaction. What do I do?
