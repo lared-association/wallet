@@ -4,8 +4,8 @@
             <Icon slot="prefix" type="ios-people" size="0" />
             <OptionGroup label="Multisig accounts">
                 <Option v-for="item in signers" :key="item.address.plain()" :value="item.address.plain()">
-                    {{ item.label }}
                     {{ item.multisig ? $t('label_postfix_multisig') : '' }}
+                    {{ item.label }}
                 </Option>
             </OptionGroup>
         </Select>
@@ -23,13 +23,27 @@ export default class SignerFilter extends SignerFilterTs {}
     font-size: 0.16rem !important;
 }
 
+/deep/ .ivu-select-item {
+    max-width: 6rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 /deep/ .ivu-select-selected-value {
     font-size: @smallFont !important;
     height: 0.35rem !important;
+    max-width: 1.75rem !important;
 }
 
 /deep/ .ivu-select-selection {
     height: 0.35rem !important;
     border-radius: 0.034rem;
+}
+
+/deep/ .ivu-select-dropdown {
+    width: auto !important;
+    left: unset !important;
+    right: 0.4rem !important;
 }
 </style>

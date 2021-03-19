@@ -1,23 +1,30 @@
 <template>
     <div class="update-metadata-modal-conatiner">
-        <div class="modal-title">{{ $t(modalTitle) }}</div>
         <FormWrapper>
             <ValidationObserver v-slot="{ handleSubmit }" ref="observer" slim>
-                <form autocomplete="off" onsubmit="event.preventDefault()" class="form-line-container mt-3">
-                    <FormRow>
+                <form autocomplete="off" onsubmit="event.preventDefault()">
+                    <SignerSelector
+                        v-if="!editMode"
+                        v-model="formItems.signerAddress"
+                        :signers="signers"
+                        label="form_label_by_account"
+                        @input="onChangeSigner"
+                    />
+                    <FormRow v-else>
                         <template v-slot:label> {{ $t('form_label_by_account') }}: </template>
                         <template v-slot:inputs>
                             <div class="select-container">
-                                <SignerSelector
+                                <input
                                     v-model="formItems.signerAddress"
-                                    :signers="signers"
-                                    :no-label="true"
-                                    @input="onChangeSigner"
+                                    :disabled="editMode"
+                                    class="input-size input-style"
+                                    :placeholder="$t('form_label_by_account')"
+                                    type="text"
                                 />
                             </div>
                         </template>
                     </FormRow>
-                    <FormRow>
+                    <FormRow v-if="showTargetAccount">
                         <template v-slot:label> {{ $t('form_label_target_account') }}: </template>
                         <template v-slot:inputs>
                             <ValidationProvider
@@ -32,6 +39,7 @@
                                 <ErrorTooltip :errors="errors">
                                     <input
                                         v-model="formItems.targetAccount"
+                                        :disabled="editMode"
                                         class="input-size input-style"
                                         :placeholder="$t('form_label_target_account_hint')"
                                         type="text"
@@ -43,7 +51,12 @@
                     <FormRow v-if="type === MetadataType.Mosaic">
                         <template v-slot:label> {{ $t(targetLabel) }}: </template>
                         <template v-slot:inputs>
-                            <MosaicSelector v-model="formItems.targetId" :mosaic-hex-ids="ownedTargetHexIds" default-mosaic="firstInList" />
+                            <MosaicSelector
+                                v-model="formItems.targetId"
+                                :mosaic-hex-ids="ownedTargetHexIds"
+                                default-mosaic="firstInList"
+                                :disabled="editMode"
+                            />
                         </template>
                     </FormRow>
                     <div v-if="type === MetadataType.Namespace">
@@ -51,9 +64,32 @@
                             v-model="formItems.targetId"
                             :namespaces="ownedTargetHexIds"
                             :disable-linked="false"
-                            label="targetLabel"
+                            :label="$t(targetLabel)"
+                            :disabled="editMode"
                         />
                     </div>
+                    <FormRow v-if="editMode">
+                        <template v-slot:label> {{ $t('form_label_scoped_metadata_key') }}: </template>
+                        <template v-slot:inputs>
+                            <input
+                                v-if="type == MetadataType.Account"
+                                v-model="formItems.scopedKey"
+                                :disabled="editMode"
+                                class="input-size input-style"
+                                :placeholder="$t('form_label_scoped_metadata_key_hint')"
+                                type="text"
+                            />
+                            <Select v-else v-model="chosenValue" class="select-size select-style">
+                                <Option
+                                    v-for="metadataModel in metadataList"
+                                    :key="metadataModel.metadataId"
+                                    :value="metadataModel.metadataId"
+                                >
+                                    {{ `${metadataModel.scopedMetadataKey} : ${metadataModel.value}` }}
+                                </Option>
+                            </Select>
+                        </template>
+                    </FormRow>
                     <FormRow>
                         <template v-slot:label> {{ $t('form_label_value') }}: </template>
                         <template v-slot:inputs>

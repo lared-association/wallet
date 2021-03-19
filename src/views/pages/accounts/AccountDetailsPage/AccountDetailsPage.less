@@ -19,7 +19,7 @@
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-rows: auto rem;
+    grid-template-rows: auto;
     background-color: @white;
     border-radius: 0.04rem;
     overflow: hidden;
@@ -30,13 +30,12 @@
         padding: 0.2rem 0.4rem;
         margin: 0;
         display: grid;
-        grid-template-columns: 20%80%;
-        overflow: scroll;
+        grid-template-columns: 2.1rem auto;
+        grid-template-rows: auto;
+        overflow: auto;
 
         .right-container {
-            height: 100%;
             width: 100%;
-            overflow-x: hidden;
 
             .title-row {
                 font-size: @biggerFont;

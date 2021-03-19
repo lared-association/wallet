@@ -1,5 +1,5 @@
 <template>
-    <div class="form-wrapper">
+    <div ref="form" class="form-wrapper">
         <DisabledFormOverlay :whitelisted="whitelisted" />
         <slot />
     </div>
@@ -19,5 +19,9 @@ export default class FormWrapper extends Vue {
      * @type{boolean}
      */
     @Prop({ default: false }) whitelisted: boolean;
+
+    public $refs!: {
+        form: HTMLElement;
+    };
 }
 </script>

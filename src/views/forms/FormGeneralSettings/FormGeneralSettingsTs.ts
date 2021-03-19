@@ -34,12 +34,13 @@ import MaxFeeSelector from '@/components/MaxFeeSelector/MaxFeeSelector.vue';
 // @ts-ignore
 import AccountSelectorField from '@/components/AccountSelectorField/AccountSelectorField.vue';
 // @ts-ignore
+import DeleteProfileButton from '@/components/DeleteProfileButton/DeleteProfileButton.vue';
+// @ts-ignore
 import ModalFormProfileUnlock from '@/views/modals/ModalFormProfileUnlock/ModalFormProfileUnlock.vue';
 // @ts-ignore
 import FormLabel from '@/components/FormLabel/FormLabel.vue';
 import { SettingsModel } from '@/core/database/entities/SettingsModel';
 import { AccountModel } from '@/core/database/entities/AccountModel';
-import { networkConfig } from '@/config';
 
 @Component({
     components: {
@@ -54,6 +55,7 @@ import { networkConfig } from '@/config';
         AccountSelectorField,
         ModalFormProfileUnlock,
         FormLabel,
+        DeleteProfileButton,
     },
     computed: {
         ...mapGetters({
@@ -91,13 +93,25 @@ export class FormGeneralSettingsTs extends Vue {
         defaultAccount: '',
     };
 
+    /**
+     * Indicates if form has no changes and button should be disabled.
+     */
+    public isConfirmButtonDisabled: boolean = true;
+
+    /**
+     * Unlocks confirm button.
+     */
+    public onChange(): void {
+        this.isConfirmButtonDisabled = false;
+    }
+
     public created() {
         this.resetForm();
     }
 
     public resetForm() {
         this.formItems = { ...this.settings };
-        this.formItems.explorerUrl = networkConfig.explorerUrl;
+
         if (!this.settings.defaultAccount && this.knownAccounts.length) {
             this.formItems.defaultAccount = this.knownAccounts[0].id;
         }
@@ -131,9 +145,16 @@ export class FormGeneralSettingsTs extends Vue {
             // - add notification and emit
             this.$store.dispatch('notification/ADD_SUCCESS', NotificationType.SUCCESS_SETTINGS_UPDATED);
             this.$emit('submit', this.formItems);
+            this.$emit('close');
         } catch (e) {
             this.$store.dispatch('notification/ADD_ERROR', 'An error happened, please try again.');
             console.error(e);
         }
+    }
+
+    public async logout(): Promise<void> {
+        this.$emit('close');
+        await this.$store.dispatch('profile/LOG_OUT');
+        this.$router.push({ name: 'profiles.login' });
     }
 }

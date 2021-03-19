@@ -21,6 +21,8 @@ import iView from 'view-design';
 import locale from 'view-design/dist/locale/en-US';
 import 'view-design/dist/styles/iview.css';
 import infiniteScroll from 'vue-infinite-scroll';
+import Toast from 'vue-toastification';
+import 'vue-toastification/dist/index.css';
 
 // internal dependencies
 import { UIBootstrapper } from '@/app/UIBootstrapper';
@@ -31,6 +33,14 @@ import VueNumber from 'vue-number-animation';
 import { VeeValidateSetup } from '@/core/validation/VeeValidateSetup';
 // @ts-ignore
 import App from '@/app/App.vue';
+import clickOutsideDirective from '@/directives/clickOutside';
+import { PluginOptions } from 'vue-toastification/dist/types/src/types';
+// @ts-ignore
+import { library } from '@fortawesome/fontawesome-svg-core';
+// @ts-ignore
+import { faFileCsv } from '@fortawesome/free-solid-svg-icons';
+// @ts-ignore
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 /// region UI plugins
 Vue.use(iView, { locale });
@@ -40,7 +50,20 @@ Vue.use(VueRx);
 Vue.use(VueNumber);
 VeeValidateSetup.initialize();
 Vue.use(infiniteScroll);
+const toastDefaultOptions: PluginOptions = {
+    closeButton: false,
+    timeout: 3000,
+    transition: 'Vue-Toastification__fade',
+    transitionDuration: 300,
+};
+Vue.use(Toast, toastDefaultOptions);
+library.add(faFileCsv);
+Vue.component('font-awesome-icon', FontAwesomeIcon);
 /// end-region UI plugins
+
+/// directives
+Vue.directive('click-outside', clickOutsideDirective);
+/// end-region directives
 
 const app = new Vue({
     router,
@@ -48,7 +71,6 @@ const app = new Vue({
     i18n,
     created: function () {
         // This will execute following processes:
-        // - configure $Notice
         // - configure Electron
         // - configure Vue directives
         UIBootstrapper.configure(this);

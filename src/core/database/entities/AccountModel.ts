@@ -14,14 +14,16 @@
  *
  */
 
-import { Address, PublicAccount, SignedTransaction } from 'symbol-sdk';
-import { NodeModel } from './NodeModel';
+import { Address, PublicAccount } from 'symbol-sdk';
 
 export class AccountType {
     public static readonly SEED: number = 1;
     public static readonly PRIVATE_KEY = 2;
     public static readonly KEYSTORE = 3;
     public static readonly TREZOR = 4;
+    public static readonly LEDGER = 5;
+    public static readonly OPT_IN = 6;
+    public static readonly LEDGER_OPT_IN = 7;
 
     public static fromDescriptor(descriptor: string) {
         switch (descriptor) {
@@ -34,6 +36,12 @@ export class AccountType {
                 return AccountType.SEED;
             case 'Trezor':
                 return AccountType.TREZOR;
+            case 'Ledger':
+                return AccountType.LEDGER;
+            case 'OptIn':
+                return AccountType.OPT_IN;
+            case 'Ledger-OptIn':
+                return AccountType.LEDGER_OPT_IN;
         }
     }
 }
@@ -55,9 +63,7 @@ export class AccountModel {
     public readonly path: string;
     public readonly isMultisig: boolean;
     public readonly encRemoteAccountPrivateKey?: string;
-    public readonly signedPersistentDelReqTxs?: SignedTransaction[];
-    public readonly isPersistentDelReqSent?: boolean;
-    public readonly selectedHarvestingNode?: NodeModel;
+
     /**
      * Permits to return specific field's mapped object instances
      * @return any

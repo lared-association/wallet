@@ -1,6 +1,6 @@
 <template>
     <div>
-        <FormWrapper>
+        <FormWrapper class="namespace-transaction-form-wrapper">
             <ValidationObserver v-slot="{ handleSubmit }" ref="observer" slim>
                 <form onsubmit="event.preventDefault()" class="form-container mt-3 create-namespace-form">
                     <SignerSelector v-model="formItems.signerAddress" :signers="signers" @input="onChangeSigner" />
@@ -38,14 +38,14 @@
                         v-model="formItems.newNamespaceName"
                         :is-need-auto-focus="false"
                         :namespace-registration-type="formItems.registrationType"
-                        @input="stripTagsNamesapceName"
+                        @input="stripTagsNamespaceName"
                     />
                     <FormRow v-if="formItems.registrationType === typeSubNamespace">
                         <template v-slot:label> {{ $t('current_validity') }}: </template>
                         <template v-slot:inputs>
                             <div class="inputs-container">
                                 <div class="display-value">
-                                    {{ relativeTimetoParent }}
+                                    {{ relativeTimeToParent }}
                                 </div>
                             </div>
                         </template>
@@ -61,9 +61,19 @@
                         :rental-type="formItems.registrationType === typeRootNamespace ? 'root-namespace' : 'child-namespace'"
                         :duration="formItems.duration"
                     />
-                    <MaxFeeAndSubmit v-if="!isAggregate" v-model="formItems.maxFee" @button-clicked="handleSubmit(onSubmit)" />
-                    <div v-else class="ml-2" style="text-align: right;">
-                        <button type="submit" class="save-button centered-button button-style inverted-button" @click="emitToAggregate">
+                    <MaxFeeAndSubmit
+                        v-if="!isAggregate"
+                        v-model="formItems.maxFee"
+                        :disable-submit="currentAccount.isMultisig"
+                        @button-clicked="handleSubmit(onSubmit)"
+                    />
+                    <div v-else-if="!hideSave" class="ml-2" style="text-align: right;">
+                        <button
+                            type="submit"
+                            class="save-button centered-button button-style inverted-button"
+                            :disabled="currentAccount.isMultisig"
+                            @click="emitToAggregate"
+                        >
                             {{ $t('save') }}
                         </button>
                     </div>
@@ -94,9 +104,6 @@ export default class FormNamespaceRegistrationTransaction extends FormNamespaceR
     .form-row-inner-container {
         grid-template-columns: 3rem calc(100% - 3rem);
     }
-}
-/deep/ .form-wrapper {
-    max-width: 12rem;
 }
 
 .save-button {

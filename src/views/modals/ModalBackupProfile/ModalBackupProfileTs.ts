@@ -25,7 +25,7 @@ import FormProfileUnlock from '@/views/forms/FormProfileUnlock/FormProfileUnlock
 // @ts-ignore
 import { AccountModel } from '@/core/database/entities/AccountModel';
 import { MnemonicPassPhrase } from 'symbol-hd-wallets';
-import { SymbolPaperWallet, IAccountInfo, IHDAccountInfo } from 'symbol-paper-wallets';
+import { LaredPaperWallet, IAccountInfo, IHDAccountInfo } from 'lared-paper-wallets';
 import { AccountService } from '@/services/AccountService';
 import { UIHelpers } from '@/core/utils/UIHelpers';
 
@@ -171,14 +171,23 @@ export class ModalBackupProfileTs extends Vue {
      * Generates and downloads paper-wallet for the root account and the profile(known) accounts
      */
     protected async generateAndDownloadPaperWallet(): Promise<boolean> {
-        const rootAccount: Account = this.accountService.getAccountByPath(new MnemonicPassPhrase(this.plainMnemonic), this.networkType);
+        const rootAccount: Account = this.accountService.getAccountByPath(
+            new MnemonicPassPhrase(this.plainMnemonic),
+            this.currentProfile.networkType,
+            AccountService.getAccountPathByNetworkType(this.networkType),
+        );
         const rootAccountInfo: IHDAccountInfo = {
             mnemonic: this.plainMnemonic,
             rootAccountPublicKey: rootAccount.publicKey,
             rootAccountAddress: rootAccount.address.pretty(),
         };
 
-        const paperWallet = new SymbolPaperWallet(rootAccountInfo, this.knownAccountInfos, this.networkType, this.generationHash);
+        const paperWallet = new LaredPaperWallet(
+            rootAccountInfo,
+            this.knownAccountInfos,
+            this.currentProfile.networkType,
+            this.currentProfile.generationHash,
+        );
         const pdfArray: Uint8Array = await paperWallet.toPdf();
         return UIHelpers.downloadBytesAsFile(pdfArray, `paper-wallet-${this.currentProfile.profileName}`, 'application/pdf');
     }

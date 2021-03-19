@@ -6,7 +6,7 @@
 }
 
 .node-selector-container {
-    padding-top: 0.2rem;
+    padding-top: 0;
 }
 
 .network-text {
@@ -15,19 +15,8 @@
     margin-right: 10px;
 }
 
-.current-node-info {
-    color: @primary;
-    font-size: @smallFont;
-
-    .ivu-row {
-        &:nth-child(1) {
-            margin-bottom: 0.1rem;
-        }
-    }
-}
-
 .node-list-container {
-    margin-top: 0.24rem;
+    margin-top: 0;
 
     .node-list-head {
         font-size: @smallFont;
@@ -37,9 +26,8 @@
 
     .node-list-content {
         border: none !important;
-        margin-top: 0.1rem;
         border: 0.02rem solid @line;
-        height: 2.2rem;
+        height: 2.5rem;
         padding: 0.1rem 0;
 
         ul {
@@ -51,54 +39,14 @@
 
         .list-item {
             font-size: @smallerFont;
-            color: @grayLight;
+            color: @grayDark;
             padding: 0.04rem 0.22rem;
             width: 100%;
             overflow: hidden;
-
-            &.active {
-                background-color: @listItemBackgroundColor;
-            }
         }
     }
 }
 
-.node-list-text {
-    margin: 0.08rem 0 0.25rem 0;
-    color: @tipFontColor;
-    font-size: @minimumFont;
-
-    .ivu-icon-ios-help-circle-outline {
-        margin-right: 0.03rem;
-    }
-}
-.endpoint-healthy,
-.endpoint-unhealthy {
+.contact-selector {
     -webkit-app-region: no-drag;
-
-    i.point {
-        display: inline-block;
-        width: 14px;
-        height: 14px;
-        background-color: #18b566;
-        border-radius: 50%;
-    }
-
-    .point {
-        vertical-align: middle;
-        margin-right: 0.08rem;
-        margin-left: 0;
-    }
-
-    .network_type_text {
-        font-size: @smallerFont;
-        vertical-align: unset;
-        color: #fff;
-    }
-}
-
-.endpoint-unhealthy {
-    i {
-        background-color: red;
-    }
 }

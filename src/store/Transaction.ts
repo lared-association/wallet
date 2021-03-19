@@ -203,7 +203,11 @@ export default {
             state.partialTransactions = conditionalSort(transactions, transactionComparator);
         },
         setAllTransactions: (state: TransactionState) => {
-            state.transactions = [...state.partialTransactions, ...state.unconfirmedTransactions, ...state.confirmedTransactions];
+            state.transactions = [
+                ...(state.partialTransactions === undefined ? [] : state.partialTransactions),
+                ...(state.unconfirmedTransactions === undefined ? [] : state.unconfirmedTransactions),
+                ...(state.confirmedTransactions === undefined ? [] : state.confirmedTransactions),
+            ];
         },
         filterTransactions: (
             state: TransactionState,
@@ -254,6 +258,9 @@ export default {
                 return;
             }
             const repositoryFactory: RepositoryFactory = rootGetters['network/repositoryFactory'];
+            if (!repositoryFactory) {
+                return;
+            }
             const transactionRepository = repositoryFactory.createTransactionRepository();
             const subscribeTransactions = (
                 group: TransactionGroupState,
@@ -482,6 +489,8 @@ export default {
             // Reloading Balances
             await dispatch('account/LOAD_ACCOUNT_INFO', {}, { root: true });
             dispatch('mosaic/LOAD_MOSAICS', {}, { root: true });
+
+            await dispatch('restriction/LOAD_ACCOUNT_RESTRICTIONS', {}, { root: true });
         },
         /// end-region scoped actions
 

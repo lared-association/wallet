@@ -28,9 +28,10 @@ import AccountActions from '@/components/AccountActions/AccountActions.vue';
 // @ts-ignore
 import FormInputEditable from '@/components/FormInputEditable/FormInputEditable.vue';
 // @ts-ignore
-import ModalConfirmDelete from '@/views/modals/ModalConfirmDelete/ModalConfirmDelete.vue';
+import ModalConfirm from '@/views/modals/ModalConfirm/ModalConfirm.vue';
 import { AddressBook, IContact } from 'symbol-address-book';
 import { ValidationRuleset } from '@/core/validation/ValidationRuleset';
+import { Address } from 'symbol-sdk';
 
 @Component({
     components: {
@@ -39,13 +40,16 @@ import { ValidationRuleset } from '@/core/validation/ValidationRuleset';
         AccountActions,
         AccountAddressDisplay,
         FormInputEditable,
-        ModalConfirmDelete,
+        ModalConfirm,
     },
     computed: {
         ...mapGetters({
             addressBook: 'addressBook/getAddressBook',
             selectedContact: 'addressBook/getSelectedContact',
         }),
+        address: function () {
+            return Address.createFromRawAddress(this.selectedContact.address).pretty();
+        },
     },
 })
 export class ContactDetailPanelTs extends Vue {
@@ -62,7 +66,13 @@ export class ContactDetailPanelTs extends Vue {
 
     public saveProperty(propName: string) {
         return (newVal: string) => {
-            this.selectedContact[propName] = newVal;
+            if (propName === 'address') {
+                const plainAddress = Address.createFromRawAddress(this.selectedContact.address).plain();
+                this.selectedContact[propName] = plainAddress;
+                this.$forceUpdate();
+            } else {
+                this.selectedContact[propName] = newVal;
+            }
             this.$store.dispatch('addressBook/UPDATE_CONTACT', { id: this.selectedContact.id, contact: this.selectedContact });
         };
     }
@@ -77,5 +87,6 @@ export class ContactDetailPanelTs extends Vue {
 
     public removeContact() {
         this.$store.dispatch('addressBook/REMOVE_CONTACT', this.selectedContact.id);
+        this.showDeleteConfirmModal = false;
     }
 }

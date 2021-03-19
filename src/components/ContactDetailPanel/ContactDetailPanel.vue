@@ -19,8 +19,8 @@
                     <div class="detail-row">
                         <FormInputEditable
                             :model="selectedContact"
-                            :value="selectedContact.address"
-                            :new-value="selectedContact.address"
+                            :value="address"
+                            :new-value="address"
                             :editing="false"
                             :rules="validationRules.addressOrPublicKey"
                             :label="$t('contact_address')"
@@ -44,7 +44,7 @@
                             :value="selectedContact.email"
                             :new-value="selectedContact.email"
                             :editing="false"
-                            :rules="''"
+                            :rules="validationRules.email"
                             :label="$t('contact_email')"
                             :on-edit="saveProperty('email')"
                         />
@@ -60,7 +60,7 @@
                             :on-edit="saveProperty('notes')"
                         />
                     </div>
-                    <div class="detail-row" style="margin-top: 1rem;">
+                    <div class="detail-row">
                         <div class="bottom-buttons-container">
                             <div></div>
                             <button type="button" class="centered-button button-style button danger-button" @click="showDeleteModal = true">
@@ -71,7 +71,12 @@
                 </div>
             </div>
         </div>
-        <ModalConfirmDelete :visible="showDeleteModal" @close="showDeleteModal = false" @delete="removeContact" />
+        <ModalConfirm
+            v-model="showDeleteModal"
+            :title="$t('delete_contact_confirmation_title')"
+            :message="$t('delete_contact_confirmation_message', { contactName: selectedContact.name })"
+            @confirmed="removeContact"
+        />
     </div>
 </template>
 

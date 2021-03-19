@@ -83,6 +83,18 @@ export class FormProfilePasswordUpdateTs extends Vue {
     };
 
     /**
+     * Indicates if form has no changes and button should be disabled.
+     */
+    public isConfirmButtonDisabled: boolean = true;
+
+    /**
+     * Unlocks confirm button.
+     */
+    public onChange(): void {
+        this.isConfirmButtonDisabled = false;
+    }
+
+    /**
      * Type the ValidationObserver refs
      * @type {{
      *     observer: InstanceType<typeof ValidationObserver>
@@ -125,7 +137,7 @@ export class FormProfilePasswordUpdateTs extends Vue {
             const newPassword = new Password(this.formItems.password);
             const oldSeed = this.currentProfile.seed;
             const plainSeed = Crypto.decrypt(oldSeed, oldPassword.value);
-            const newSeed = Crypto.encrypt(plainSeed, newPassword.value);
+            const newSeed = oldSeed == '' ? oldSeed : Crypto.encrypt(plainSeed, newPassword.value);
 
             // // - create new password hash
             const passwordHash = ProfileService.getPasswordHash(newPassword);

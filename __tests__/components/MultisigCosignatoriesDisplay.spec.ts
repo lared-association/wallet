@@ -13,7 +13,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  *
  */
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
+import Vuex from 'vuex';
 // @ts-ignore
 import MultisigCosignatoriesDisplay from '@/components/MultisigCosignatoriesDisplay/MultisigCosignatoriesDisplay';
 import { MultisigAccountInfo, NetworkType, PublicAccount } from 'symbol-sdk';
@@ -24,7 +25,7 @@ const account1 = PublicAccount.createFromPublicKey('B694186EE4AB0558CA4AFCFDD43B
 const account2 = PublicAccount.createFromPublicKey('CF893FFCC47C33E7F68AB1DB56365C156B0736824A0C1E273F9E00B8DF8F01EB', networkType);
 const account3 = PublicAccount.createFromPublicKey('DAB1C38C3E1642494FCCB33138B95E81867B5FB59FC4277A1D53761C8B9F6D14', networkType);
 const account4 = PublicAccount.createFromPublicKey('1674016C27FE2C2EB5DFA73996FA54A183B38AED0AA64F756A3918BAF08E061B', networkType);
-const multisigInfo = new MultisigAccountInfo(account1.address, 1, 1, [account2.address, account3.address], []);
+const multisigInfo = new MultisigAccountInfo(1, account1.address, 1, 1, [account2.address, account3.address], []);
 
 describe('MultisigCosignatoriesDisplay', () => {
     test('Getters should return correct values when no modifications', () => {
@@ -120,7 +121,10 @@ describe('MultisigCosignatoriesDisplay', () => {
         wrapper.destroy();
     });
 
-    test('Should emit when adding a cosigner', () => {
+    test('Should emit when adding a cosigner', async () => {
+        const vue = createLocalVue();
+        vue.use(Vuex);
+
         const wrapper = shallowMount(MultisigCosignatoriesDisplay, {
             i18n,
             propsData: {
@@ -128,11 +132,19 @@ describe('MultisigCosignatoriesDisplay', () => {
                 modifiable: true,
                 cosignatoryModifications: {},
             },
+            mocks: {
+                $store: {
+                    dispatch: jest.fn(() => true),
+                },
+            },
         });
 
         const component = wrapper.vm as MultisigCosignatoriesDisplay;
 
         component.onAddCosignatory(account4.address);
+
+        await wrapper.vm.$nextTick();
+
         expect(wrapper.emitted('add')).toBeTruthy();
         expect(wrapper.emitted().add[0]).toEqual([account4.address]);
         wrapper.destroy();

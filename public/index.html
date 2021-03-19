@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -6,21 +6,23 @@
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-    <title>Symbol Wallet</title>
+    <title>LaRed Wallet</title>
   </head>
   <body>
-    <noscript>
-      <strong>We're sorry but Symbol Wallet doesn't work without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <script>
-        // window.electron = require('electron');
-        // window.node_fs = require('fs')
-    </script>
-    <div id="app">
-      <script type="text/javascript" src="<%= BASE_URL %>config/app.conf.js"></script>
-      <script type="text/javascript" src="<%= BASE_URL %>config/fees.conf.js"></script>
-      <script type="text/javascript" src="<%= BASE_URL %>config/network.conf.js"></script>
+      <script data-jsd-embedded data-key="fa44ffaa-bb6c-48e4-b8ea-3ec880701d71" data-base-url="https://jsd-widget.atlassian.com" src="https://jsd-widget.atlassian.com/assets/embed.js"></script>
+      <noscript>
+          <strong>We're sorry but LaRed Wallet doesn't work without JavaScript enabled. Please enable it to continue.</strong>
+      </noscript>
+      <script>
+            // window.electron = require('electron');
+            // window.node_fs = require('fs')
+      </script>
+      <script type="text/javascript"></script>
+      <div id="app">
+          <script type="text/javascript" src="<%= BASE_URL %>config/app.conf.js"></script>
+          <script type="text/javascript" src="<%= BASE_URL %>config/fees.conf.js"></script>
+          <script type="text/javascript" src="<%= BASE_URL %>config/network.conf.js"></script>
 
-    </div>
+      </div>
   </body>
 </html>

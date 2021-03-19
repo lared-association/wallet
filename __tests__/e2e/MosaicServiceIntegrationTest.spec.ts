@@ -32,6 +32,7 @@ import { of } from 'rxjs';
 import { anything, deepEqual, instance, mock, when } from 'ts-mockito';
 
 const fakeMosaicInfo = new MosaicInfo(
+    1,
     '59FDA0733F17CF0001772CBC',
     new MosaicId([3646934825, 3576016193]),
     new UInt64([3403414400, 2095475]),
@@ -93,7 +94,9 @@ describe('services/MosaicService', () => {
         const { networkCurrency } = await mosaicService.getNetworkCurrencies(repositoryFactory, generationHash).toPromise();
         const addresses: Address[] = [address1, address2, address3, address4, address5];
         const accountInfos = await repositoryFactory.createAccountRepository().getAccountsInfo(addresses).toPromise();
-        const result = await mosaicService.getMosaics(repositoryFactory, generationHash, networkCurrency, accountInfos).toPromise();
+        const result = await mosaicService
+            .getMosaics(repositoryFactory, generationHash, networkCurrency, accountInfos, address1)
+            .toPromise();
         console.log(JSON.stringify(result, null, 2));
     });
 
@@ -102,7 +105,9 @@ describe('services/MosaicService', () => {
         const { networkCurrency } = await mosaicService.getNetworkCurrencies(repositoryFactory, generationHash).toPromise();
         const addresses: Address[] = [address1];
         const accountInfos = await repositoryFactory.createAccountRepository().getAccountsInfo(addresses).toPromise();
-        const result = await mosaicService.getMosaics(repositoryFactory, generationHash, networkCurrency, accountInfos).toPromise();
+        const result = await mosaicService
+            .getMosaics(repositoryFactory, generationHash, networkCurrency, accountInfos, address1)
+            .toPromise();
         console.log(JSON.stringify(result, null, 2));
     });
 
@@ -111,7 +116,9 @@ describe('services/MosaicService', () => {
         const { networkCurrency } = await mosaicService.getNetworkCurrencies(repositoryFactory, generationHash).toPromise();
         const addresses: Address[] = [address3];
         const accountInfos = await repositoryFactory.createAccountRepository().getAccountsInfo(addresses).toPromise();
-        const result = await mosaicService.getMosaics(repositoryFactory, generationHash, networkCurrency, accountInfos).toPromise();
+        const result = await mosaicService
+            .getMosaics(repositoryFactory, generationHash, networkCurrency, accountInfos, address1)
+            .toPromise();
         console.log(JSON.stringify(result, null, 2));
     });
 });

@@ -34,11 +34,25 @@ export class ModalMetadataUpdateTs extends Vue {
     })
     visible: boolean;
 
+    @Prop({
+        default: null,
+    })
+    value: MetadataModel;
+
+    @Prop({
+        default: false,
+    })
+    editMode: boolean;
     /**
      * @MetadataModel
      * Determine edit or add
      */
     protected metadata: MetadataModel;
+
+    @Prop({
+        default: null,
+    })
+    metadataList: MetadataModel[];
 
     /**
      * Metadata update modal type
@@ -47,6 +61,28 @@ export class ModalMetadataUpdateTs extends Vue {
         default: MetadataType.Account,
     })
     protected type: MetadataType;
+
+    /**
+     * Modal title from modal type
+     * @type {string}
+     */
+    get modalTitle(): string {
+        let title: string = '';
+        switch (this.type) {
+            case MetadataType.Mosaic:
+                title = 'modal_title_mosaic_metadata';
+                break;
+
+            case MetadataType.Namespace:
+                title = 'modal_title_namespace_metadata';
+                break;
+
+            default:
+                title = 'modal_title_account_metadata';
+                break;
+        }
+        return title;
+    }
 
     /**
      * Visibility state

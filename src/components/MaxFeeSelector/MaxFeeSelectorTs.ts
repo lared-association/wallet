@@ -20,6 +20,7 @@ import { feesConfig } from '@/config';
 // @ts-ignore
 import FormLabel from '@/components/FormLabel/FormLabel.vue';
 import { NetworkCurrencyModel } from '@/core/database/entities/NetworkCurrencyModel';
+import { TransactionFees } from 'symbol-sdk';
 
 @Component({
     components: {
@@ -30,7 +31,14 @@ import { NetworkCurrencyModel } from '@/core/database/entities/NetworkCurrencyMo
             defaultFee: 'app/defaultFee',
             networkMosaicName: 'mosaic/networkMosaicName',
             networkCurrency: 'mosaic/networkCurrency',
+            transactionFees: 'network/transactionFees',
         }),
+    },
+    props: {
+        placement: {
+            type: String,
+            default: 'bottom-start',
+        },
     },
 })
 export class MaxFeeSelectorTs extends Vue {
@@ -41,6 +49,8 @@ export class MaxFeeSelectorTs extends Vue {
 
     @Prop({ default: false })
     public displayOnly!: boolean;
+
+    public placement: string;
 
     /**
      * Networks currency mosaic name
@@ -54,6 +64,7 @@ export class MaxFeeSelectorTs extends Vue {
      */
     private networkCurrency: NetworkCurrencyModel;
 
+    public transactionFees: TransactionFees;
     /**
      * Default fee setting
      * @var {number}
@@ -69,6 +80,13 @@ export class MaxFeeSelectorTs extends Vue {
      * Dynamically calculated highest fee
      */
     @Prop({ default: 0 }) calculatedHighestFee: number;
+
+    /**
+     * Show low fee warning
+     */
+    @Prop({ default: false }) showLowFeeWarning: boolean;
+
+    @Prop({ default: false }) showFeeLabel: boolean;
 
     /**
      * The fees to be displayed in the dropw down.
@@ -117,7 +135,7 @@ export class MaxFeeSelectorTs extends Vue {
     private formatLabel(labelKey: string, fee: number, mosaic: string, showAmount: boolean = true): string {
         let label = this.$t(labelKey).toString();
         if (showAmount) {
-            label += ': ' + this.getRelative(fee) + ' ' + mosaic;
+            label += `: ${this.getFormattedRelative(fee)} ${mosaic}`;
         }
         return label;
     }
@@ -137,7 +155,7 @@ export class MaxFeeSelectorTs extends Vue {
      * @type {number}
      */
     get chosenMaxFee(): number {
-        return this.value || this.defaultFee;
+        return typeof this.value === 'number' ? this.value : this.defaultFee;
     }
 
     /**
@@ -153,11 +171,14 @@ export class MaxFeeSelectorTs extends Vue {
      * @param {number} price
      * @return {number}
      */
-    public getRelative(amount: number): number {
+    public getFormattedRelative(amount: number): string {
+        let relativeAmount: number;
         if (this.networkCurrency === undefined) {
-            return amount;
+            relativeAmount = amount;
+        } else {
+            relativeAmount = amount / Math.pow(10, this.networkCurrency.divisibility);
         }
-        return amount / Math.pow(10, this.networkCurrency.divisibility);
+        return relativeAmount.toLocaleString(undefined, { maximumFractionDigits: this.networkCurrency.divisibility });
     }
 
     /**

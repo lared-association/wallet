@@ -62,6 +62,14 @@ export class TransactionCommand {
         this.tempTransactionSigner = new AccountTransactionSigner(this.tempAccount);
     }
 
+    public sign(service: TransactionAnnouncerService, account: TransactionSigner): Observable<Observable<SignedTransaction>[]> {
+        return this.resolveTransactions(account).pipe(
+            flatMap((transactions) => {
+                return of(transactions.map((t) => account.signTransaction(t, this.generationHash)));
+            }),
+        );
+    }
+
     public announce(service: TransactionAnnouncerService, account: TransactionSigner): Observable<Observable<BroadcastResult>[]> {
         return this.resolveTransactions(account).pipe(
             flatMap((transactions) => {
@@ -95,7 +103,7 @@ export class TransactionCommand {
         );
     }
 
-    private announceHashAndAggregateBonded(
+    public announceHashAndAggregateBonded(
         service: TransactionAnnouncerService,
         signedTransactions: Observable<SignedTransaction>[],
     ): Observable<BroadcastResult> {
@@ -177,8 +185,11 @@ export class TransactionCommand {
         }
     }
 
-    private calculateSuggestedMaxFee(transaction: Transaction): Transaction {
-        const feeMultiplier = this.resolveFeeMultipler(transaction);
+    public calculateSuggestedMaxFee(transaction: Transaction): Transaction {
+        const feeMultiplier =
+            this.resolveFeeMultipler(transaction) < this.transactionFees.minFeeMultiplier
+                ? this.transactionFees.minFeeMultiplier
+                : this.resolveFeeMultipler(transaction);
         if (!feeMultiplier) {
             return transaction;
         }
@@ -191,12 +202,18 @@ export class TransactionCommand {
 
     private resolveFeeMultipler(transaction: Transaction): number | undefined {
         if (transaction.maxFee.compact() == 1) {
-            return this.transactionFees.medianFeeMultiplier || this.networkConfiguration.defaultDynamicFeeMultiplier;
-            // TODO uncomment the following line when https://github.com/nemtech/catapult-rest/issues/326 is resolved
-            // return this.transactionFees.averageFeeMultiplier * 1.2 || this.networkConfiguration.defaultDynamicFeeMultiplier;
+            const fees =
+                this.transactionFees.medianFeeMultiplier < this.transactionFees.minFeeMultiplier
+                    ? this.transactionFees.minFeeMultiplier
+                    : this.transactionFees.medianFeeMultiplier;
+            return fees || this.networkConfiguration.defaultDynamicFeeMultiplier;
         }
         if (transaction.maxFee.compact() == 2) {
-            return this.transactionFees.highestFeeMultiplier || this.networkConfiguration.defaultDynamicFeeMultiplier;
+            const fees =
+                this.transactionFees.highestFeeMultiplier < this.transactionFees.minFeeMultiplier
+                    ? this.transactionFees.minFeeMultiplier
+                    : this.transactionFees.highestFeeMultiplier;
+            return fees || this.networkConfiguration.defaultDynamicFeeMultiplier;
         }
         return undefined;
     }

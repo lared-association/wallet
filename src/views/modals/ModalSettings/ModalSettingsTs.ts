@@ -93,4 +93,8 @@ export class ModalSettingsTs extends Vue {
     protected onTabChange(index: number) {
         this.currentTabIndex = index;
     }
+
+    public close() {
+        this.$emit('close');
+    }
 }

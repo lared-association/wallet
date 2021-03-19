@@ -86,6 +86,11 @@ export class FormNamespaceRegistrationTransactionTs extends FormTransactionBase 
         default: false,
     })
     isAggregate: boolean;
+
+    @Prop({
+        default: false,
+    })
+    hideSave: boolean;
     /**
      * Current account's owned namespaces
      */
@@ -116,7 +121,7 @@ export class FormNamespaceRegistrationTransactionTs extends FormTransactionBase 
         registrationType: NamespaceRegistrationType.RootNamespace,
         newNamespaceName: '',
         parentNamespaceName: '',
-        duration: 172800,
+        duration: 86400,
         maxFee: 0,
     };
 
@@ -139,7 +144,8 @@ export class FormNamespaceRegistrationTransactionTs extends FormTransactionBase 
         this.formItems.registrationType = this.registrationType || NamespaceRegistrationType.RootNamespace;
         this.formItems.newNamespaceName = this.namespaceId ? this.namespaceId.fullName : '';
         this.formItems.parentNamespaceName = this.parentNamespaceId ? this.parentNamespaceId.fullName : '';
-        this.formItems.duration = this.duration || 172800;
+        this.formItems.duration =
+            this.duration || this.networkConfiguration.minNamespaceDuration / this.networkConfiguration.blockGenerationTargetTime || 86400;
         // - maxFee must be absolute
         this.formItems.maxFee = this.defaultFee;
     }
@@ -195,13 +201,13 @@ export class FormNamespaceRegistrationTransactionTs extends FormTransactionBase 
         this.formItems.maxFee = transaction.maxFee.compact();
     }
 
-    public relativeTimetoParent = '';
+    public relativeTimeToParent = '';
 
-    public getTimeByparentNamespaceName() {
+    public getTimeByParentNamespaceName() {
         const selectedNamespace = this.ownedNamespaces.find((item) => item.name === this.formItems.parentNamespaceName);
 
         if (selectedNamespace) {
-            this.relativeTimetoParent = NamespaceService.getExpiration(
+            this.relativeTimeToParent = NamespaceService.getExpiration(
                 this.networkConfiguration,
                 this.currentHeight,
                 selectedNamespace.endHeight,
@@ -211,12 +217,12 @@ export class FormNamespaceRegistrationTransactionTs extends FormTransactionBase 
 
     setParentNamespaceName(val) {
         this.formItems.parentNamespaceName = val;
-        this.getTimeByparentNamespaceName();
+        this.getTimeByParentNamespaceName();
     }
     /**
      * filter tags
      */
-    public stripTagsNamesapceName() {
+    public stripTagsNamespaceName() {
         this.formItems.newNamespaceName = FilterHelpers.stripFilter(this.formItems.newNamespaceName);
     }
     /**
@@ -239,6 +245,18 @@ export class FormNamespaceRegistrationTransactionTs extends FormTransactionBase 
     onTitleChange() {
         if (this.isAggregate && this.value) {
             Object.assign(this.formItems, this.value);
+        }
+    }
+
+    /**
+     * Resetting the form when choosing a multisig signer and changing multisig signer
+     * Is necessary to make the mosaic inputs reactive
+     */
+    @Watch('selectedSigner')
+    onSelectedSignerChange() {
+        this.formItems.signerAddress = this.selectedSigner.address.plain();
+        if (this.isMultisigMode()) {
+            this.resetForm();
         }
     }
 }

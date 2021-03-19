@@ -1,10 +1,10 @@
-
+﻿
 ![](https://i.imgur.com/r8mM1TN.gif)
-# LaRed Wallet
+# LaRed Wallet v1.0.0
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-Cross-platform client for Symbol LaRed to manage accounts, mosaics, namespaces, and issue transactions.
+Cross-platform client for managing accounts, tokens, namespaces, and issuing transactions.
 ***
 ## Features
 ### Home 
@@ -28,7 +28,7 @@ Modify account multisig properties by defining an account as a Multi-Signature A
 
 ![](https://i.imgur.com/1VYTgrh.jpg)
 ### Staking
-Use the Delegated Proof of Stake score of an account to create new blocks and receive rewards without having to run a node locally.
+Use the Importance score of an account to create new blocks and receive rewards without having to run a node locally.
 
 ![](https://i.imgur.com/iIGQhTe.jpg)
 ### Aggregate
@@ -42,7 +42,7 @@ Get the latest cryptocurrency news and articles, conveniently displayed in the N
 ***
 ## Installation
 
-LaRed Wallet is available for Mac, Windows, and as a web application.
+LaRed Wallet is available for Mac, Windows, Linux, and as a web application.
 
 1. Download LaRed Desktop Wallet from the [releases section](https://github.com/superhow/lared-wallet).
 
@@ -50,7 +50,9 @@ LaRed Wallet is available for Mac, Windows, and as a web application.
 
 3. Create a profile. Remember to save the mnemonic somewhere safe (offline).
 ***
-## Requirements
+## Building instructions (web version)
+
+### Requirements
 
 **Node.js 10 or 12 LTS** is required to run LaRed Wallet as a web application.
 It is recommended to install **npm**, the Node.js package manager. This can be done by executing the following command:
@@ -58,8 +60,7 @@ It is recommended to install **npm**, the Node.js package manager. This can be d
    ```
 sudo apt install npm
    ```
-***
-## Building instructions
+### Instructions
 
 1. Clone the project.
 
@@ -97,37 +98,42 @@ npm run dev
 * Multisig management                   ✔️
 * Token creation                        ✔️
 * Namespace creation                    ✔️
+* News section                          ✔️
+* Staking                               ✔️
 * Profile Backup (PDF)                  ✔️
 * Mnemonic Backup (PDF)                 ✔️
 * QR Code Upload (Upload Image)         ✔️
-* News section                          ✔️
+* QR Code Import (Scan via Camera)      ✔️
 
-### Features currently not working
-
-* QR Code Import (Scan via Camera)      ❌
-* Staking                               ❌
-
-***
 ## Main changes
 * Changed news source (RSS channel) to cryptonews.com (https://cryptonews.com/news/feed) for more relevant news articles.
 * Altered UI elements (colors, text, icons) for a more appealing, consistent and coherent appearance.
-* Changed some terms to more popular and understandable ones:
-	* Mosaics changed to Tokens
-	* Harvesting changed to Staking
-	* Importance changed to Delegated Proof of Stake
+* Added the Jira Service Management widget for issue reporting.
+* Changed some terminology:
+	* Mosaics       -> Tokens
+	* Harvesting    -> Staking
 * Lared-paper-wallets node module has been added to enhance the design of exported PDF paper wallet (when making a backup of accounts or mnemonic phrases). The templates of paper wallets are .PDF files, encoded in Base64 and stored in encodedBasePdf.js and encodedBasePrivateKeyPdf.js files in /modules/lared-paper-wallets/resources.
 ***
-## Known issues
-* Staking not working (stuck on Activation in Progress).
-* Import QR Code (Scan via Camera) currently not working on Google Chrome (Windows 10) browser.
-* Refreshing the page (pressing F5) requires logging in again.
-* Namespace duration limit (2592000) is ignored when creating a namespace via Aggregate section. 
+### Known issues
+
+* The process of starting Delegated Staking may be problematic, as there may be difficulties in linking the node, remote and vrf keys. Linking a key may appear to be ineffective, as the screen may not refresh after signing the linking transaction. In that case, logout and login again.
+
 ***
-## License
+### Additional notes
 
-Copyright 2018-present NEM
+* The RSS feed (cryptonews.com) is fetched using a CORS proxy (cors-bridged) if the project is deployed in the 'development' environment, and without a proxy if the project is in the 'production' environment. For the web version of the project, the news section normally may not show any fetched news due to CORS policy, thus the CORS proxy is applied.
 
-Licensed under the [Apache License 2.0](LICENSE)
+***
+# Troubleshooting & FAQ (Frequently Asked Questions)
+### Q: Nothing happens after I press "Link All keys" in the Staking menu and sign the transaction. What do I do?
+ A: Try logging out of your account, and login again. Alternatively, link each key manually.
 
-[self]: https://github.com/superhow/lared-wallet
-[docs]: https://nemtech.github.io
+### Q: Nothing happens once I link a node, remote or vrf key in the Staking menu. What do I do?
+ A: The linking may take up to 30 seconds, and the screen should refresh afterwards. If that doesn't happen, try logging out of the account and logging in again.
+
+### Q: The Staking status is stuck on "ACTIVATION IN PROGRESS". What do I do?
+ A: Check if you have more than 200 of network currency (lared.moneda) and staking currency (lared.red), and if your Importance is higher than 0. Otherwise, stop the staking process, relink all the keys and try starting the staking process again. If all else fails, try a different node.
+
+### Q: There's an issue that's not documented in this section. What do I do?
+ A: If you encounter an issue, please click the "See an issue?" button in the bottom right corner and fill in the details of the issue report.
+***

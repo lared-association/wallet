@@ -38,10 +38,11 @@ export interface NetworkConfigurationDefaults {
     maxMosaicDivisibility: number;
     maxMessageSize: number;
     epochAdjustment: number;
+    totalChainImportance: number;
+    generationHash: string;
 }
 
 export interface NetworkConfig {
-    defaultNodeUrl: string;
     faucetUrl: string;
     nodes: NodeConfig[];
     defaultNetworkType: number;
@@ -49,47 +50,71 @@ export interface NetworkConfig {
     networkConfigurationDefaults: NetworkConfigurationDefaults;
 }
 
-const defaultNetworkConfig: NetworkConfig = {
-    explorerUrl: 'http://explorer-0.10.0.x-01.symboldev.network/',
-    faucetUrl: 'http://faucet-0.10.0.x-01.symboldev.network/',
+const defaultTestnetNetworkConfig: NetworkConfig = {
+    explorerUrl: 'http://explorer.lared.superhow.net/',
+    faucetUrl: 'http://faucet.lared.superhow.net/',
     defaultNetworkType: 152,
-    defaultNodeUrl: 'http://api-01.us-east-1.0.10.0.x.symboldev.network:3000',
     networkConfigurationDefaults: {
         maxMosaicDivisibility: 6,
-        namespaceGracePeriodDuration: 2592000,
+        namespaceGracePeriodDuration: 120,
         lockedFundsPerAggregate: '10000000',
         maxCosignatoriesPerAccount: 25,
         blockGenerationTargetTime: 15,
         maxNamespaceDepth: 3,
-        maxMosaicDuration: 21024000,
-        minNamespaceDuration: 172800,
+        maxMosaicDuration: 315360000,
+        minNamespaceDuration: 1,
         maxNamespaceDuration: 2102400,
-        maxTransactionsPerAggregate: 1000,
+        maxTransactionsPerAggregate: 250,
         maxCosignedAccountsPerAccount: 25,
         maxMessageSize: 1024,
-        maxMosaicAtomicUnits: 9000000000000000,
-        currencyMosaicId: '5F160D7851F3CB30',
-        harvestingMosaicId: '5F160D7851F3CB30',
+        maxMosaicAtomicUnits: 5000000000000000,
+        currencyMosaicId: '4131C5FD69F7A75C',
+        harvestingMosaicId: '6D601F79F46AF3D3',
         defaultDynamicFeeMultiplier: 1000,
         epochAdjustment: 1573430400,
+        totalChainImportance: undefined,
+        generationHash: '9F5D58B772A55C1393ACE5802E4633C1FF3C04EA85195B0EBA4249F6E09ACB7A',
     },
     nodes: [
-        { friendlyName: 'API EU Central 1', roles: 2, url: 'http://api-01.eu-central-1.0.10.0.x.symboldev.network:3000' },
-        { friendlyName: 'API EU West 1', roles: 2, url: 'http://api-01.eu-west-1.0.10.0.x.symboldev.network:3000' },
-        { friendlyName: 'API US East 1', roles: 2, url: 'http://api-01.us-east-1.0.10.0.x.symboldev.network:3000' },
-        { friendlyName: 'API US West 1', roles: 2, url: 'http://api-01.us-west-1.0.10.0.x.symboldev.network:3000' },
-        { friendlyName: 'API US West 2', roles: 2, url: 'http://api-01.us-west-2.0.10.0.x.symboldev.network:3000' },
-        {
-            friendlyName: 'API AP South East 1',
-            roles: 2,
-            url: 'http://api-01.ap-southeast-1.0.10.0.x.symboldev.network:3000',
-        },
-        {
-            friendlyName: 'API AP North East 1',
-            roles: 2,
-            url: 'http://api-01.ap-northeast-1.0.10.0.x.symboldev.network:3000',
-        },
+        { friendlyName: 'lared-dual-1', roles: 2, url: 'http://51.116.236.138:3000' },
+        { friendlyName: 'lared-dual-2', roles: 2, url: 'http://20.52.149.171:3000' },
     ],
+};
+
+const defaultMainnetNetworkConfig: NetworkConfig = {
+  explorerUrl: 'http://explorer.lared.superhow.net/',
+    faucetUrl: 'http://faucet.lared.superhow.net/',
+    defaultNetworkType: 104,
+    networkConfigurationDefaults: {
+        maxMosaicDivisibility: 6,
+        namespaceGracePeriodDuration: 120,
+        lockedFundsPerAggregate: '10000000',
+        maxCosignatoriesPerAccount: 25,
+        blockGenerationTargetTime: 15,
+        maxNamespaceDepth: 3,
+        maxMosaicDuration: 315360000,
+        minNamespaceDuration: 1,
+        maxNamespaceDuration: 2102400,
+        maxTransactionsPerAggregate: 250,
+        maxCosignedAccountsPerAccount: 25,
+        maxMessageSize: 1024,
+        maxMosaicAtomicUnits: 5000000000000000,
+        currencyMosaicId: '4131C5FD69F7A75C',
+        harvestingMosaicId: '6D601F79F46AF3D3',
+        defaultDynamicFeeMultiplier: 1000,
+        epochAdjustment: 1573430400,
+        totalChainImportance: undefined,
+        generationHash: '9F5D58B772A55C1393ACE5802E4633C1FF3C04EA85195B0EBA4249F6E09ACB7A',
+    },
+    nodes: [
+        { friendlyName: 'lared-dual-1', roles: 2, url: 'http://51.116.236.138:3000' },
+        { friendlyName: 'lared-dual-2', roles: 2, url: 'http://20.52.149.171:3000' },
+    ],
+};
+
+const defaultNetworkConfig: Record<number, NetworkConfig> = {
+    152: defaultTestnetNetworkConfig,
+    104: defaultMainnetNetworkConfig,
 };
 
 const resolvedNetworkConfig: NetworkConfig = window['networkConfig'] || defaultNetworkConfig;
