@@ -38,6 +38,10 @@
     {
       "name": "NEM Group",
       "email": "support@nem.group"
+    },
+	    {
+      "name": "SUPERHOW",
+      "email": "info@superhow.io"
     }
   ],
   "dependencies": {
@@ -152,10 +156,10 @@
   "build": {
     "appId": "superhow.lared.desktop-wallet",
     "extends": null,
-    "copyright": "",
+    "copyright": "SUPERHOW",
     "productName": "LaRedWallet",
     "artifactName": "${name}-${os}-${arch}-${version}.${ext}",
-    "icon": "./public/assets/icons/Lared.ico",
+    "icon": "./dist/assets/icons/icons.iconset/icon_512x512.png",
     "files": [
       "dist/**/*",
       "package.json",
@@ -170,7 +174,7 @@
   },
   "mac": {
     "category": "public.app-category.finance",
-    "target": "dmg",
+    "target": "tar.gz",
     "icon": "./assets/icons/Icon.incs",
     "hardenedRuntime": true,
     "gatekeeperAssess": false,
