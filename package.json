@@ -33,15 +33,15 @@
     "node-hid:prebuild-install:lin": "export npm_config_platform=linux && npm run node-hid:prebuild-install",
     "version": "echo $npm_package_version"
   },
-  "author": "NEM Group <support@nem.group>",
+  "author": "SUPERHOW",
   "contributors": [
-    {
-      "name": "NEM Group",
-      "email": "support@nem.group"
-    },
-	    {
+     {
       "name": "SUPERHOW",
       "email": "info@superhow.io"
+    },
+	  {
+      "name": "NEM Group",
+      "email": "support@nem.group"
     }
   ],
   "dependencies": {
@@ -157,7 +157,7 @@
     "appId": "superhow.lared.desktop-wallet",
     "extends": null,
     "copyright": "SUPERHOW",
-    "productName": "LaRedWallet",
+    "productName": "LaRed Wallet",
     "artifactName": "${name}-${os}-${arch}-${version}.${ext}",
     "icon": "./dist/assets/icons/icons.iconset/icon_512x512.png",
     "files": [
@@ -175,7 +175,7 @@
   "mac": {
     "category": "public.app-category.finance",
     "target": "tar.gz",
-    "icon": "./assets/icons/Icon.incs",
+    "icon": "./assets/icons/icons.iconset/icon_512x512.png",
     "hardenedRuntime": true,
     "gatekeeperAssess": false,
     "asarUnpack": [
@@ -199,10 +199,10 @@
     "perMachine": false,
     "allowToChangeInstallationDirectory": true,
     "publisherName": "SUPERHOW",
-    "installerIcon": "./assets/icons/Lared.ico"
+    "installerIcon": "./assets/icons/icons.iconset/icon_512x512.png"
   },
   "linux": {
     "category": "Finance",
-    "icon": "./assets/icons/Icon.incs"
+    "icon": "./assets/icons/icons.iconset/icon_512x512.png"
   }
 }
