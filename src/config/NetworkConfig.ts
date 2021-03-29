@@ -68,16 +68,16 @@ const defaultTestnetNetworkConfig: NetworkConfig = {
         maxCosignedAccountsPerAccount: 25,
         maxMessageSize: 1024,
         maxMosaicAtomicUnits: 5000000000000000,
-        currencyMosaicId: '4131C5FD69F7A75C',
-        harvestingMosaicId: '6D601F79F46AF3D3',
+        currencyMosaicId: '451AFC47F3BED2A1',
+        harvestingMosaicId: '13E9B8E6C3378A2F',
         defaultDynamicFeeMultiplier: 1000,
         epochAdjustment: 1573430400,
-        totalChainImportance: undefined,
-        generationHash: '9F5D58B772A55C1393ACE5802E4633C1FF3C04EA85195B0EBA4249F6E09ACB7A',
+        totalChainImportance: 420000,
+        generationHash: '8CE1EF876A8CCE234E8C600877D568810C6797F031C75E63AA0E6674B00F057C',
     },
     nodes: [
-        { friendlyName: 'lared-dual-1', roles: 2, url: 'http://51.116.236.138:3000' },
-        { friendlyName: 'lared-dual-2', roles: 2, url: 'http://20.52.149.171:3000' },
+        { friendlyName: 'LaRed-testnet-dual1', roles: 7, url: 'http://20.52.130.150:3000' },
+        { friendlyName: 'LaRed-testnet-dual2', roles: 7, url: 'http://20.52.134.220:3000' },
     ],
 };
 
@@ -114,7 +114,6 @@ const defaultMainnetNetworkConfig: NetworkConfig = {
 
 const defaultNetworkConfig: Record<number, NetworkConfig> = {
     152: defaultTestnetNetworkConfig,
-    104: defaultMainnetNetworkConfig,
 };
 
 const resolvedNetworkConfig: NetworkConfig = window['networkConfig'] || defaultNetworkConfig;

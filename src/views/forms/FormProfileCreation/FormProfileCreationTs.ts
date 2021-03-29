@@ -70,7 +70,7 @@ export class FormProfileCreationTs extends Vue {
 
     created() {
         this.profileService = new ProfileService();
-        this.formItems.networkType = NetworkType.MAIN_NET;
+        this.formItems.networkType = NetworkType.TEST_NET;
         const { isLedger } = this.$route.meta;
         this.isLedger = isLedger;
     }
