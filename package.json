@@ -33,7 +33,7 @@
     "node-hid:prebuild-install:lin": "export npm_config_platform=linux && npm run node-hid:prebuild-install",
     "version": "echo $npm_package_version"
   },
-  "author": "SUPERHOW",
+  "author": "SUPERHOW <info@superhow.io>",
   "contributors": [
      {
       "name": "SUPERHOW",
