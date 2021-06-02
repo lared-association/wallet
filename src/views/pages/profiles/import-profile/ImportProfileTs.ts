@@ -50,7 +50,7 @@ export default class ImportProfileTs extends Vue {
      * List of steps
      * @var {string[]}
      */
-    public StepBarTitleList = ['enter_profile_details', 'mnemonic_phrase', 'select_accounts', 'finish'];
+    public StepBarTitleList = ['create_profile', 'mnemonic_phrase', 'select_accounts', 'finish'];
 
     /**
      * Network's currency mosaic id

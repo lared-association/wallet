@@ -161,11 +161,9 @@
     font-size: @bigFont;
     color: @grayLight;
     font-family: @symbolFontSemiBold;
-
     &.done {
         color: @purpleDark;
     }
-
     &.done:before {
         content: '';
         background-image: url('../../../resources/img/check.png');
@@ -176,9 +174,8 @@
         height: 0.36rem;
         background-repeat: no-repeat;
     }
-
     &.active {
-        background: linear-gradient(105deg, rgba(186,19,19,1) 0%, rgba(168,15,15,1) 26%, rgba(164,15,15,1) 64%, rgba(255,0,0,1) 100%);
+        background: #3d3d3d;
         color: @white;
     }
 }

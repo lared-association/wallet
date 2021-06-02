@@ -50,7 +50,7 @@ export interface NetworkConfig {
     networkConfigurationDefaults: NetworkConfigurationDefaults;
 }
 
-const defaultTestnetNetworkConfig: NetworkConfig = {
+export const defaultTestnetNetworkConfig: NetworkConfig = {
     explorerUrl: 'http://explorer.lared.superhow.net/',
     faucetUrl: 'http://faucet.lared.superhow.net/',
     defaultNetworkType: 152,
@@ -81,7 +81,7 @@ const defaultTestnetNetworkConfig: NetworkConfig = {
     ],
 };
 
-const defaultMainnetNetworkConfig: NetworkConfig = {
+export const defaultMainnetNetworkConfig: NetworkConfig = {
   explorerUrl: 'http://explorer.lared.superhow.net/',
     faucetUrl: 'http://faucet.lared.superhow.net/',
     defaultNetworkType: 104,

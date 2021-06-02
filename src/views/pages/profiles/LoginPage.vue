@@ -15,7 +15,6 @@
                         <div class="banner-image">
                         </div>
                         <div class="login-card radius">
-                            <div class="img-box" />
                             <p class="login-title">
                                 {{ $t('login_to_symbol_account') }}
                             </p>

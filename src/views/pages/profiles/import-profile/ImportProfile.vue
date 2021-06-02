@@ -132,7 +132,7 @@
                 <div v-if="getCurrentStep() === 3">
                     <img src="@/views/resources/img/icons/Incoming.svg" style="width: 30%;" />
                     <p class="text text-big">
-                        {{ $t('creation_successful') }}
+                        {{ $t('restore_successful') }}
                     </p>
                 </div>
             </div>

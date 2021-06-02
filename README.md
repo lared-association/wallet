@@ -1,6 +1,5 @@
-﻿
-![](https://i.imgur.com/r8mM1TN.gif)
-# LaRed Wallet v1.0.0
+﻿![](https://i.imgur.com/r8mM1TN.gif)
+# LaRed Wallet v1.0.2
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
@@ -44,13 +43,17 @@ Get the latest cryptocurrency news and articles, conveniently displayed in the N
 
 LaRed Wallet is available for Mac, Windows, Linux, and as a web application.
 
-1. Download LaRed Desktop Wallet from the [releases section](https://github.com/superhow/lared-wallet).
+1. Download LaRed Desktop Wallet from the releases section.
 
 2. Launch the executable file and follow the installation instructions.
 
 3. Create a profile. Remember to save the mnemonic somewhere safe (offline).
 ***
 ## Building instructions (web version)
+
+### Recomended
+
+Ubuntu 18.04 TLS, 4Gb RAM
 
 ### Requirements
 
@@ -60,34 +63,77 @@ It is recommended to install **npm**, the Node.js package manager. This can be d
    ```
 sudo apt install npm
    ```
-### Instructions
+   
+1. Install nvm:
+
+```
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+```
+
+2. Logout and login to your server
+
+```
+exit
+```
+
+3. Update npm
+
+```
+nvm install 12 tls
+```
+   
+4. Check version   
+   
+```
+node -v
+```
+
+### Wallet Installation Instructions
 
 1. Clone the project.
 
-
-    ```
+```
 git clone https://github.com/superhow/lared-wallet.git
-    ```
+```
 
 2. Navigate to the project folder.
 
-    ```
+```
 cd lared-wallet
-    ```
+```
 	
 3. Install the dependencies. This may take a while.
 
-    ```
+```
 npm install 
-    ```
+```
 
 4. Start the development server.
 
-    ```
+```
 npm run dev 
-    ```
+```
 
-5. Visit http://localhost:8080/#/ in your browser.
+5. Visit http://yourserverip:8080/#/ in your browser.
+
+6. Build production package
+
+```
+npm run build 
+```
+
+7. Install apache
+
+```
+apt install apache2 
+```
+
+8. Move the compiled application to the webserver location
+
+```
+mv dist/* /var/www/html
+```
+
 ***
 ## Feature status
 ### Features currently working
@@ -105,6 +151,7 @@ npm run dev
 * QR Code Upload (Upload Image)         ✔️
 * QR Code Import (Scan via Camera)      ✔️
 
+***
 ## Main changes
 * Changed news source (RSS channel) to cryptonews.com (https://cryptonews.com/news/feed) for more relevant news articles.
 * Altered UI elements (colors, text, icons) for a more appealing, consistent and coherent appearance.
@@ -132,7 +179,7 @@ npm run dev
  A: The linking may take up to 30 seconds, and the screen should refresh afterwards. If that doesn't happen, try logging out of the account and logging in again.
 
 ### Q: The Staking status is stuck on "ACTIVATION IN PROGRESS". What do I do?
- A: Check if you have more than 200 of network currency (lared.moneda) and staking currency (lared.red), and if your Importance is higher than 0. Otherwise, stop the staking process, relink all the keys and try starting the staking process again. If all else fails, try a different node.
+ A: Check if you have more than 200 of network currency and staking currency, and if your Importance is higher than 0. Otherwise, stop the staking process, relink all the keys and try starting the staking process again. If all else fails, try a different node.
 
 ### Q: There's an issue that's not documented in this section. What do I do?
  A: If you encounter an issue, please click the "See an issue?" button in the bottom right corner and fill in the details of the issue report.

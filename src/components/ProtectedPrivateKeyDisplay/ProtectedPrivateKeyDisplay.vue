@@ -55,12 +55,12 @@ export default class ProtectedPrivateKeyDisplay extends ProtectedPrivateKeyDispl
     padding-left: 8px;
 }
 
-    .value {
-        font-family: @symbolFontLight;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        color: #3d3d3d;
-    }
+.value {
+    font-family: @symbolFontLight;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: #3d3d3d;
+}
 
 .account-detail-row-3cols {
     display: grid;
