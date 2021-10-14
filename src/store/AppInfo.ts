@@ -89,7 +89,7 @@ export default {
         setLoadingOverlayMessage: (state: AppInfoState, message: string) => Vue.set(state, 'loadingOverlayMessage', message),
         setLoadingDisableCloseButton: (state: AppInfoState, bool: boolean) => Vue.set(state, 'loadingDisableCloseButton', bool),
         faucetUrl: (state: AppInfoState, faucetUrl) => {
-            Vue.set(state, 'faucetUrl', faucetUrl || networkConfig[NetworkType.TEST_NET].faucetUrl);
+            Vue.set(state, 'faucetUrl', faucetUrl || networkConfig[NetworkType.MAIN_NET].faucetUrl);
         },
     },
     actions: {
