@@ -1,5 +1,5 @@
 ﻿![](https://i.imgur.com/r8mM1TN.gif)
-# LaRed Wallet v1.0.7
+# LARED Wallet v1.0.7
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
@@ -41,9 +41,9 @@ Get the latest cryptocurrency news and articles, conveniently displayed in the N
 ***
 ## Installation
 
-LaRed Wallet is available for Mac, Windows, Linux, and as a web application.
+LARED Wallet is available for Mac, Windows, Linux, and as a web application.
 
-1. Download LaRed Desktop Wallet from the releases section.
+1. Download LARED Desktop Wallet from the releases section.
 
 2. Launch the executable file and follow the installation instructions.
 
@@ -57,7 +57,7 @@ Ubuntu 18.04 TLS, 4Gb RAM
 
 ### Requirements
 
-**Node.js 10 or 12 LTS** is required to run LaRed Wallet as a web application.
+**Node.js 10 or 12 LTS** is required to run LARED Wallet as a web application.
 It is recommended to install **npm**, the Node.js package manager. This can be done by executing the following command:
 
    ```
