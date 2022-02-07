@@ -37,11 +37,7 @@
   "contributors": [
     {
       "name": "SUPERHOW",
-      "email": "info@superhow.io"
-    },
-    {
-      "name": "NEM Group",
-      "email": "support@nem.group"
+      "email": "info@superhow.com"
     }
   ],
   "dependencies": {
@@ -54,30 +50,21 @@
     "@ledgerhq/hw-transport-webusb": "^5.41.0",
     "@reflect.bridged.xyz/core": "0.0.2-rc.4",
     "animate.css": "^3.7.2",
-    "ansi-html": "0.0.7",
-    "ansi-regex": "^6.0.1",
     "await-lock": "^2.0.1",
     "axios": "^0.23.0",
     "bip32-path": "^0.4.2",
     "call-bind": "^1.0.2",
-    "client-sdk": "0.0.6",
     "decamelize": "^5.0.0",
     "electron-context-menu": "^2.4.0",
     "electron-localshortcut": "^3.2.1",
     "file-saver": "^2.0.2",
-    "json2csv": "^5.0.1",
     "lared-paper-wallets": "file:modules/lared-paper-wallets",
-    "lodash": "^4.17.21",
-    "node-fetch": "^3.2.0",
-    "node-forge": "^1.2.1",
-    "node-notifier": "^10.0.1",
-    "nth-check": "^2.0.1",
-    "postcss": "^8.4.6",
+    "json2csv": "^5.0.1",
+    "lodash": "^4.17.20",
     "request": "^2.88.0",
     "rss-parser": "^3.7.3",
     "rxjs": "^6.6.7",
     "symbol-sdk": "^1.0.2-alpha-202108061451",
-    "tar": "^6.1.11",
     "trezor-connect": "^7.0.5",
     "utf8": "^3.0.0",
     "vee-validate": "^3.2.3",
@@ -96,9 +83,7 @@
     "vue-rx": "^6.2.0",
     "vue-toastification": "^1.7.11",
     "vuedraggable": "^2.23.2",
-    "vuex": "^3.0.1",
-    "ws": "^8.4.2",
-    "xmldom": "^0.6.0"
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@babel/compat-data": "^7.9.6",
@@ -124,8 +109,8 @@
     "babel-preset-env": "^1.7.0",
     "bufferutil": "^4.0.1",
     "cross-env": "^5.1.1",
-    "electron": "^17.0.0",
-    "electron-builder": "^22.14.13",
+    "electron": "11.1.0",
+    "electron-builder": "22.9.1",
     "electron-notarize": "1.0.0",
     "electron-packager": "15.2.0",
     "electron-rebuild": "^2.3.4",
@@ -152,7 +137,7 @@
     "symbol-openapi-typescript-fetch-client": "^1.0.0",
     "symbol-paper-wallets": "^1.0.2",
     "symbol-qr-library": "0.14.1-alpha-202103081047",
-    "symbol-uri-scheme": "^0.6.1",
+    "symbol-uri-scheme": "0.6.0",
     "ts-jest": "^25.3.0",
     "ts-mockito": "^2.6.1",
     "typescript": "^3.7.2",
