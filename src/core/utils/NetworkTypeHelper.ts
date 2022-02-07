@@ -23,8 +23,8 @@ export class NetworkTypeHelper {
      * Network types with their names
      */
     public static networkTypeList: NetworkNodeEntry[] = [
-/*        { value: NetworkType.MAIN_NET, label: 'LARED Mainnet' },
-*/        { value: NetworkType.TEST_NET, label: 'LARED Testnet' },
+        { value: NetworkType.MAIN_NET, label: 'LARED Mainnet' },
+        { value: NetworkType.TEST_NET, label: 'LARED Testnet' },
     ];
 
     /**

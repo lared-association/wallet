@@ -86,32 +86,33 @@ export const defaultMainnetNetworkConfig: NetworkConfig = {
     defaultNetworkType: 104,
     networkConfigurationDefaults: {
         maxMosaicDivisibility: 6,
-        namespaceGracePeriodDuration: 120,
+        namespaceGracePeriodDuration: 30,
         lockedFundsPerAggregate: '10000000',
         maxCosignatoriesPerAccount: 25,
         blockGenerationTargetTime: 15,
         maxNamespaceDepth: 3,
         maxMosaicDuration: 315360000,
-        minNamespaceDuration: 1,
-        maxNamespaceDuration: 2102400,
-        maxTransactionsPerAggregate: 250,
+        minNamespaceDuration: 60,
+        maxNamespaceDuration: 315360000,
+        maxTransactionsPerAggregate: 1000,
         maxCosignedAccountsPerAccount: 25,
-        maxMessageSize: 1024,
+        maxMessageSize: 4096,
         maxMosaicAtomicUnits: 5000000000000000,
-        currencyMosaicId: '4131C5FD69F7A75C',
-        harvestingMosaicId: '6D601F79F46AF3D3',
-        defaultDynamicFeeMultiplier: 1000,
-        epochAdjustment: 1573430400,
-        totalChainImportance: undefined,
-        generationHash: '9F5D58B772A55C1393ACE5802E4633C1FF3C04EA85195B0EBA4249F6E09ACB7A',
+        currencyMosaicId: '69A4831E1A6D8303',
+        harvestingMosaicId: '2B3D7AE3878D9E5B',
+        defaultDynamicFeeMultiplier: 100,
+        epochAdjustment: 1642674928,
+        totalChainImportance: 420000,
+        generationHash: '1E10AF1BC04485E48A2536A5683EC8F55C3B76086F65ED1F1CCB3EDA5CF623A7',
     },
     nodes: [
-        { friendlyName: 'lared-dual-1', roles: 2, url: 'http://testnet-dual-1.lared.superhow.net:3000' },
+        { friendlyName: 'LARED-testnet-dual-1', roles: 7, url: 'http://testnet-dual-1.lared.superhow.net:3000' },
     ],
 };
 
 const defaultNetworkConfig: Record<number, NetworkConfig> = {
     152: defaultTestnetNetworkConfig,
+    104: defaultMainnetNetworkConfig,
 };
 
 const resolvedNetworkConfig: NetworkConfig = window['networkConfig'] || defaultNetworkConfig;
