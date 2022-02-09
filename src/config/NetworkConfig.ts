@@ -51,8 +51,8 @@ export interface NetworkConfig {
 }
 
 export const defaultTestnetNetworkConfig: NetworkConfig = {
-    explorerUrl: 'http://explorer.lared.superhow.net/',
-    faucetUrl: 'http://faucet.lared.superhow.net/',
+    explorerUrl: 'http://explorer-test.lared.superhow.net/',
+    faucetUrl: 'http://faucet-test.lared.superhow.net/',
     defaultNetworkType: 152,
     networkConfigurationDefaults: {
         maxMosaicDivisibility: 6,
