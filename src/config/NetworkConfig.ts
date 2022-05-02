@@ -98,15 +98,17 @@ export const defaultMainnetNetworkConfig: NetworkConfig = {
         maxCosignedAccountsPerAccount: 25,
         maxMessageSize: 4096,
         maxMosaicAtomicUnits: 5000000000000000,
-        currencyMosaicId: '69A4831E1A6D8303',
-        harvestingMosaicId: '2B3D7AE3878D9E5B',
+        currencyMosaicId: '2A87782C55D6515B',
+        harvestingMosaicId: '219CCEA4AFD146DE',
         defaultDynamicFeeMultiplier: 100,
-        epochAdjustment: 1642674928,
+        epochAdjustment: 1650017101,
         totalChainImportance: 420000,
-        generationHash: '1E10AF1BC04485E48A2536A5683EC8F55C3B76086F65ED1F1CCB3EDA5CF623A7',
+        generationHash: '69960DF309EF47D705BCE411739B1FC0C224D1B516A744C615E382ACBB1AC87F',
     },
     nodes: [
-        { friendlyName: 'LARED-testnet-dual-1', roles: 7, url: 'http://testnet-dual-1.lared.superhow.net:3000' },
+        { friendlyName: 'LARED-testnet-dual-1', roles: 7, url: 'http://mainnet-dual-1.lared.superhow.net:3000' },
+        { friendlyName: 'LARED-testnet-dual-2', roles: 7, url: 'http://mainnet-dual-1.lared.superhow.net:3000' },
+        { friendlyName: 'LARED-testnet-dual-3', roles: 7, url: 'http://mainnet-dual-1.lared.superhow.net:3000' }
     ],
 };
 
