@@ -2,7 +2,7 @@
   "name": "lared-wallet",
   "description": "LARED Wallet",
   "homepage": "https://github.com/lared-association/wallet",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "repository": {
     "type": "git",
     "url": "https://github.com/lared-association/wallet.git"
