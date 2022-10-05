@@ -52,7 +52,7 @@ export interface NetworkConfig {
 
 export const defaultTestnetNetworkConfig: NetworkConfig = {
     explorerUrl: 'http://explorer-test.lared.superhow.net/',
-    faucetUrl: 'http://faucet-test.lared.superhow.net/',
+    faucetUrl: 'http://faucet.lared.superhow.net/',
     defaultNetworkType: 152,
     networkConfigurationDefaults: {
         maxMosaicDivisibility: 6,
@@ -97,13 +97,13 @@ export const defaultMainnetNetworkConfig: NetworkConfig = {
         maxTransactionsPerAggregate: 1000,
         maxCosignedAccountsPerAccount: 25,
         maxMessageSize: 4096,
-        maxMosaicAtomicUnits: 5000000000000000,
-        currencyMosaicId: '046A12946D5734F9',
-        harvestingMosaicId: '0D5D413AC84F523A',
+        maxMosaicAtomicUnits: 5000000001573330,
+        currencyMosaicId: '40FD641E445B51BE',
+        harvestingMosaicId: '3E24E1B98CC5A99B',
         defaultDynamicFeeMultiplier: 100,
-        epochAdjustment: 1655719200,
-        totalChainImportance: 420000,
-        generationHash: '7A7BB5E6CDC05C7E86B2D278A84D08FF8A17F96957B575F58CF49202888AE022',
+        epochAdjustment: 1664974800,
+        totalChainImportance: 30000,
+        generationHash: '942F18F1E9619E24B99F6443890E8ABDCD356CA9B42D138D448555F390AE2900',
     },
     nodes: [
         { friendlyName: 'LARED-testnet-dual-1', roles: 7, url: 'http://mainnet-dual-1.lared.superhow.net:3000' },
